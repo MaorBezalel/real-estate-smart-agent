@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-background;
+    }
+
+    #root {
+        @apply flex min-h-screen flex-col overflow-hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span,
+    a,
+    button,
+    input,
+    label,
+    div,
+    li,
+    ul,
+    ol,
+    textarea {
+        font-family: 'Noto Sans Hebrew';
+    }
+}
+
+@layer utilities {
+    .grid-areas-names {
+        grid-template-areas:
+            'heading illustration'
+            'cta illustration';
+    }
+}
