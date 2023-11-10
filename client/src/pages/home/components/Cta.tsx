@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function Cta(): JSX.Element {
+export default function Cta(): React.JSX.Element {
     return (
         <div
             className="h-full min-w-full pr-1 tablet-sm:mb-3 tablet-lg:min-w-fit"
@@ -19,7 +19,7 @@ export default function Cta(): JSX.Element {
                 >
                     <Link
                         to="/search"
-                        className="inline-block min-w-[9rem] rounded border-4 border-solid border-text bg-primary px-8 py-4 text-center font-extrabold text-background drop-shadow-xl duration-200 hover:scale-105 hover:brightness-110 hover:filter hover:ease-in-out tablet-sm:min-w-[11rem] tablet-sm:text-lg tablet-md:min-w-[12rem] tablet-md:text-xl laptop-sm:w-[14rem] laptop-sm:py-5 laptop-sm:text-2xl laptop-lg:w-[16rem] laptop-lg:py-5 laptop-lg:text-3xl"
+                        className="inline-block min-w-[8rem] rounded border-4 border-solid border-text bg-primary px-4 py-4 text-center font-extrabold text-background drop-shadow-xl duration-200 hover:scale-105 hover:brightness-110 hover:filter hover:ease-in-out  tablet-sm:min-w-[10rem] tablet-md:min-w-[12rem] tablet-md:text-lg tablet-lg:text-xl laptop-sm:w-[14rem] laptop-sm:py-5 laptop-sm:text-2xl laptop-lg:w-[16rem] laptop-lg:py-5 laptop-lg:text-3xl"
                     >
                         חיפוש נדל"ן
                     </Link>
@@ -30,7 +30,7 @@ export default function Cta(): JSX.Element {
                 >
                     <Link
                         to="/about"
-                        className="inline-block min-w-[9rem] rounded border-4 border-solid border-text bg-secondary px-8 py-4 text-center font-extrabold text-text drop-shadow-xl duration-200 hover:scale-105 hover:brightness-110 hover:filter hover:ease-in-out tablet-sm:min-w-[11rem] tablet-sm:text-lg tablet-md:min-w-[12rem] tablet-md:text-xl laptop-sm:w-[14rem] laptop-sm:py-5 laptop-sm:text-2xl laptop-lg:w-[16rem] laptop-lg:py-5 laptop-lg:text-3xl"
+                        className="inline-block min-w-[8rem] rounded border-4 border-solid border-text bg-secondary px-8 py-4 text-center font-extrabold text-text drop-shadow-xl duration-200 hover:scale-105 hover:brightness-110 hover:filter hover:ease-in-out tablet-sm:min-w-[10rem] tablet-md:min-w-[12rem] tablet-md:text-xl tablet-lg:text-lg laptop-sm:w-[14rem] laptop-sm:py-5 laptop-sm:text-2xl laptop-lg:w-[16rem] laptop-lg:py-5 laptop-lg:text-3xl"
                     >
                         אודות
                     </Link>

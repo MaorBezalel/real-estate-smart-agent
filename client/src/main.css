@@ -33,9 +33,7 @@
 }
 
 @layer utilities {
-    .grid-areas-names {
-        grid-template-areas:
-            'heading illustration'
-            'cta illustration';
+    .testing-container {
+        @apply border border-solid border-red-600;
     }
 }

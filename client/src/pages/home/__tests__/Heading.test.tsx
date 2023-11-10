@@ -11,9 +11,9 @@ describe('`Heading` component', () => {
     // Constants
     const HEADING_TEST_ID = 'Home Page Heading';
     const MOBILE_HEADING_SRC =
-        '/real-estate-smart-agent/src/assets/mobile-heading.svg';
+        '/real-estate-smart-agent/src/pages/home/assets/images/mobile-heading.svg';
     const DESKTOP_HEADING_SRC =
-        '/real-estate-smart-agent/src/assets/desktop-heading.svg';
+        '/real-estate-smart-agent/src/pages/home/assets/images/desktop-heading.svg';
 
     it('should render the heading image', () => {
         // Setup
