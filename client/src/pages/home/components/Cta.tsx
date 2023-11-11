@@ -1,4 +1,10 @@
 import { Link } from 'react-router-dom';
+import {
+    CTA_TEST_ID,
+    CTA_LINKS_LIST_TEST_ID,
+    CTA_SEARCH_LINK_ITEM_TEST_ID,
+    CTA_ABOUT_LINK_ITEM_TEST_ID,
+} from '../constants/testIds';
 
 export default function Cta(): React.JSX.Element {
     return (
@@ -6,16 +12,16 @@ export default function Cta(): React.JSX.Element {
             className="h-full min-w-full pr-1 tablet-sm:mb-3 tablet-lg:min-w-fit"
             style={{ gridArea: 'cta' }}
             aria-roledescription="Call To Action"
-            data-testid="Home Page CTA"
+            data-testid={CTA_TEST_ID}
         >
             <ul
                 className="flex min-w-full items-center justify-center gap-4 mobile-md:gap-11 mobile-lg:gap-14 tablet-sm:gap-20 tablet-md:gap-32 tablet-lg:items-center tablet-lg:justify-start tablet-lg:gap-10 laptop-sm:mt-14 laptop-lg:gap-20"
                 aria-label="רשימת קישורים דמויי כפתורים לדפים נוספים"
-                data-testid="Home Page CTA Links List"
+                data-testid={CTA_LINKS_LIST_TEST_ID}
             >
                 <li
                     aria-label='קישור לדף חיפוש נדל"ן'
-                    data-testid="Home Page CTA Search Link Item"
+                    data-testid={CTA_SEARCH_LINK_ITEM_TEST_ID}
                 >
                     <Link
                         to="/search"
@@ -26,7 +32,7 @@ export default function Cta(): React.JSX.Element {
                 </li>
                 <li
                     aria-label="קישור לדף אודות"
-                    data-testid="Home Page CTA About Link Item"
+                    data-testid={CTA_ABOUT_LINK_ITEM_TEST_ID}
                 >
                     <Link
                         to="/about"

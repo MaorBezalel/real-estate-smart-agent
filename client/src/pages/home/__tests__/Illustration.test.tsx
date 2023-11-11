@@ -3,26 +3,28 @@ import { describe, it, expect } from 'vitest';
 
 import Illustration from '../components/Illustration';
 
-describe('`Illustration` component', () => {
-    // Constants
-    const ANIMATION_TEST_ID = 'Home Page Illustration';
+import { ILLUSTRATION_TEST_ID } from '../constants/testIds';
 
-    it('should render the Lottie animation', () => {
+describe('`Illustration` component', () => {
+    it('should render with the correct test id', () => {
         // Setup
         render(<Illustration />);
 
         // Post Expectations
-        expect(screen.getByTestId(ANIMATION_TEST_ID)).toBeInTheDocument();
+        expect(screen.getByTestId(ILLUSTRATION_TEST_ID)).toBeInTheDocument();
     });
 
-    it('should render the Lottie animation with the correct accessibility attributes', () => {
+    it('should render with the correct accessibility attributes', () => {
         // Setup
         render(<Illustration />);
-        const animation = screen.getByTestId(ANIMATION_TEST_ID);
+        const illustration = screen.getByTestId(ILLUSTRATION_TEST_ID);
 
         // Post Expectations
-        expect(animation).toHaveAttribute('aria-label', 'איור של חיפוש נדל"ן');
-        expect(animation).toHaveAttribute(
+        expect(illustration).toHaveAttribute(
+            'aria-label',
+            'איור של חיפוש נדל"ן'
+        );
+        expect(illustration).toHaveAttribute(
             'aria-roledescription',
             'Lottie Animation'
         );
@@ -31,10 +33,9 @@ describe('`Illustration` component', () => {
     it('should be positioned in the correct grid area', () => {
         // Setup
         render(<Illustration />);
-        const animation = screen.getByTestId(ANIMATION_TEST_ID);
 
         // Post Expectations
-        expect(animation).toHaveStyle({
+        expect(screen.getByTestId(ILLUSTRATION_TEST_ID)).toHaveStyle({
             gridArea: 'illustration',
         });
     });

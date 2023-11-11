@@ -3,6 +3,8 @@ import { useMediaQuery } from '../../../hooks';
 import mobileHeading from '../assets/images/mobile-heading.svg';
 import desktopHeading from '../assets/images/desktop-heading.svg';
 
+import { HEADING_TEST_ID } from '../constants/testIds';
+
 export default function Heading(): React.JSX.Element {
     const isRowLayout = useMediaQuery('(max-width: 1023px)');
 
@@ -14,7 +16,7 @@ export default function Heading(): React.JSX.Element {
             alt="מצאו בקלות את הנכס המושלם עבורכם!"
             role="heading"
             aria-level={1}
-            data-testid="Home Page Heading"
+            data-testid={HEADING_TEST_ID}
         />
     );
 }

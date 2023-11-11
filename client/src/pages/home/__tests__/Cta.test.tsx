@@ -5,14 +5,15 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom'; // Using BrowserRouter instead of HashRouter to avoid # in the URL during tests
 import Cta from '../components/Cta';
 
-describe('`Cta` component', () => {
-    // Constants
-    const CTA_TEST_ID = 'Home Page CTA';
-    const LINKS_LIST_TEST_ID = 'Home Page CTA Links List';
-    const SEARCH_LINK_ITEM_TEST_ID = 'Home Page CTA Search Link Item';
-    const ABOUT_LINK_ITEM_TEST_ID = 'Home Page CTA About Link Item';
+import {
+    CTA_TEST_ID,
+    CTA_LINKS_LIST_TEST_ID,
+    CTA_SEARCH_LINK_ITEM_TEST_ID,
+    CTA_ABOUT_LINK_ITEM_TEST_ID,
+} from '../constants/testIds';
 
-    it('should render the Cta', () => {
+describe('`Cta` component', () => {
+    it('should render with the correct test id', () => {
         // Setup
         render(
             <Router>
@@ -24,34 +25,37 @@ describe('`Cta` component', () => {
         expect(screen.getByTestId(CTA_TEST_ID)).toBeInTheDocument();
     });
 
-    it('should render the Cta with the correct accessibility attributes', () => {
+    it('should render with the correct accessibility attributes', () => {
         // Setup
         render(
             <Router>
                 <Cta />
             </Router>
         );
-        const cta = screen.getByTestId(CTA_TEST_ID);
 
         // Post Expectations
-        expect(cta).toHaveAttribute('aria-roledescription', 'Call To Action');
+        expect(screen.getByTestId(CTA_TEST_ID)).toHaveAttribute(
+            'aria-roledescription',
+            'Call To Action'
+        );
     });
 
     describe('when looking it the list of links', () => {
-        it('should first be in the document', () => {
+        it('should render with the correct test id', () => {
             // Setup
             render(
                 <Router>
                     <Cta />
                 </Router>
             );
-            const list = screen.getByTestId(LINKS_LIST_TEST_ID);
 
             // Post Expectations
-            expect(list).toBeInTheDocument();
+            expect(
+                screen.getByTestId(CTA_LINKS_LIST_TEST_ID)
+            ).toBeInTheDocument();
         });
 
-        it('should render the list as the only direct child element of the Cta', () => {
+        it('should be the only direct child element of the `Cta` component', () => {
             // Setup
             render(
                 <Router>
@@ -59,81 +63,83 @@ describe('`Cta` component', () => {
                 </Router>
             );
             const cta = screen.getByTestId(CTA_TEST_ID);
-            const list = screen.getByTestId(LINKS_LIST_TEST_ID);
+            const list = screen.getByTestId(CTA_LINKS_LIST_TEST_ID);
 
             // Post Expectations
             expect(cta).toContainElement(list);
         });
 
-        it('should render the list with the correct accessibility attributes', () => {
+        it('should render with the correct accessibility attributes', () => {
             // Setup
             render(
                 <Router>
                     <Cta />
                 </Router>
             );
-            const list = screen.getByTestId(LINKS_LIST_TEST_ID);
 
             // Post Expectations)
-            expect(list).toHaveAttribute(
+            expect(screen.getByTestId(CTA_LINKS_LIST_TEST_ID)).toHaveAttribute(
                 'aria-label',
                 'רשימת קישורים דמויי כפתורים לדפים נוספים'
             );
         });
     });
 
-    describe('when looking at the search button-like link item', () => {
-        it('should first be in the document', () => {
+    describe('when looking at the `search` button-like link item', () => {
+        it('should render with the correct test id', () => {
             // Setup
             render(
                 <Router>
                     <Cta />
                 </Router>
             );
-            const searchLinkItem = screen.getByTestId(SEARCH_LINK_ITEM_TEST_ID);
 
             // Post Expectations
-            expect(searchLinkItem).toBeInTheDocument();
+            expect(
+                screen.getByTestId(CTA_SEARCH_LINK_ITEM_TEST_ID)
+            ).toBeInTheDocument();
         });
 
-        it('should be a child of the Cta list', () => {
+        it('should be a child of the `Cta` component links list', () => {
             // Setup
             render(
                 <Router>
                     <Cta />
                 </Router>
             );
-            const list = screen.getByTestId(LINKS_LIST_TEST_ID);
-            const searchLinkItem = screen.getByTestId(SEARCH_LINK_ITEM_TEST_ID);
+            const list = screen.getByTestId(CTA_LINKS_LIST_TEST_ID);
+            const searchLinkItem = screen.getByTestId(
+                CTA_SEARCH_LINK_ITEM_TEST_ID
+            );
 
             // Post Expectations
             expect(list).toContainElement(searchLinkItem);
         });
 
-        it('should render it with the correct accessibility attributes', () => {
+        it('should render with the correct accessibility attributes', () => {
             // Setup
             render(
                 <Router>
                     <Cta />
                 </Router>
             );
-            const searchLinkItem = screen.getByTestId(SEARCH_LINK_ITEM_TEST_ID);
 
             // Post Expectations
-            expect(searchLinkItem).toHaveAttribute(
-                'aria-label',
-                'קישור לדף חיפוש נדל"ן'
-            );
+            expect(
+                screen.getByTestId(CTA_SEARCH_LINK_ITEM_TEST_ID)
+            ).toHaveAttribute('aria-label', 'קישור לדף חיפוש נדל"ן');
         });
 
-        it('should contain a single link child element which set to lead to the search page', () => {
+        it('should father a link child element to the `search` page', () => {
             // Setup
             render(
                 <Router>
                     <Cta />
                 </Router>
             );
-            const searchLinkItem = screen.getByTestId(SEARCH_LINK_ITEM_TEST_ID);
+            const searchLinkItem = screen.getByTestId(
+                CTA_SEARCH_LINK_ITEM_TEST_ID
+            );
             const searchLink = searchLinkItem.firstElementChild;
 
             // Post Expectations
@@ -149,7 +155,9 @@ describe('`Cta` component', () => {
                     <Cta />
                 </Router>
             );
-            const searchLinkItem = screen.getByTestId(SEARCH_LINK_ITEM_TEST_ID);
+            const searchLinkItem = screen.getByTestId(
+                CTA_SEARCH_LINK_ITEM_TEST_ID
+            );
             const searchLink = searchLinkItem.firstElementChild;
 
             // Actions
@@ -160,58 +168,61 @@ describe('`Cta` component', () => {
         });
     });
 
-    describe('when looking at the about link', () => {
-        it('should first be in the document', () => {
+    describe('when looking at the `about` button-like link item', () => {
+        it('should render with the correct test id', () => {
             // Setup
             render(
                 <Router>
                     <Cta />
                 </Router>
             );
-            const aboutLinkItem = screen.getByTestId(ABOUT_LINK_ITEM_TEST_ID);
 
             // Post Expectations
-            expect(aboutLinkItem).toBeInTheDocument();
+            expect(
+                screen.getByTestId(CTA_ABOUT_LINK_ITEM_TEST_ID)
+            ).toBeInTheDocument();
         });
 
-        it('should be a child of the Cta list', () => {
+        it('should be a child of the `Cta` component links list', () => {
             // Setup
             render(
                 <Router>
                     <Cta />
                 </Router>
             );
-            const list = screen.getByTestId(LINKS_LIST_TEST_ID);
-            const aboutLinkItem = screen.getByTestId(ABOUT_LINK_ITEM_TEST_ID);
+            const list = screen.getByTestId(CTA_LINKS_LIST_TEST_ID);
+            const aboutLinkItem = screen.getByTestId(
+                CTA_ABOUT_LINK_ITEM_TEST_ID
+            );
 
             // Post Expectations
             expect(list).toContainElement(aboutLinkItem);
         });
 
-        it('should render it with the correct accessibility attributes', () => {
+        it('should render with the correct accessibility attributes', () => {
             // Setup
             render(
                 <Router>
                     <Cta />
                 </Router>
             );
-            const aboutLinkItem = screen.getByTestId(ABOUT_LINK_ITEM_TEST_ID);
 
             // Post Expectations
-            expect(aboutLinkItem).toHaveAttribute(
-                'aria-label',
-                'קישור לדף אודות'
-            );
+            expect(
+                screen.getByTestId(CTA_ABOUT_LINK_ITEM_TEST_ID)
+            ).toHaveAttribute('aria-label', 'קישור לדף אודות');
         });
 
-        it('should contain a single link child element which set to lead to the about page', () => {
+        it('should father a link child element to the `about` page', () => {
             // Setup
             render(
                 <Router>
                     <Cta />
                 </Router>
             );
-            const aboutLinkItem = screen.getByTestId(ABOUT_LINK_ITEM_TEST_ID);
+            const aboutLinkItem = screen.getByTestId(
+                CTA_ABOUT_LINK_ITEM_TEST_ID
+            );
             const aboutLink = aboutLinkItem.firstElementChild;
 
             // Post Expectations
@@ -227,7 +238,9 @@ describe('`Cta` component', () => {
                     <Cta />
                 </Router>
             );
-            const aboutLinkItem = screen.getByTestId(ABOUT_LINK_ITEM_TEST_ID);
+            const aboutLinkItem = screen.getByTestId(
+                CTA_ABOUT_LINK_ITEM_TEST_ID
+            );
             const aboutLink = aboutLinkItem.firstElementChild;
 
             // Actions

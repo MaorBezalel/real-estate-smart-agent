@@ -2,6 +2,8 @@ import Illustration from './components/Illustration';
 import Heading from './components/Heading';
 import Cta from './components/Cta';
 
+import { HOME_PAGE_TEST_ID } from './constants/testIds';
+
 export default function HomePage(): React.JSX.Element {
     return (
         <main
@@ -10,7 +12,7 @@ export default function HomePage(): React.JSX.Element {
                 gridTemplateAreas: "'heading illustration' 'cta illustration'",
             }}
             aria-label="דף הבית"
-            data-testid="Home Page"
+            data-testid={HOME_PAGE_TEST_ID}
         >
             <Illustration />
             <Heading />

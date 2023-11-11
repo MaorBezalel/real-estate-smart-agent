@@ -7,15 +7,13 @@ import '../__mocks__/matchMedia.mock';
 import { HashRouter as Router } from 'react-router-dom';
 import Heading from '../components/Heading';
 
-describe('`Heading` component', () => {
-    // Constants
-    const HEADING_TEST_ID = 'Home Page Heading';
-    const MOBILE_HEADING_SRC =
-        '/real-estate-smart-agent/src/pages/home/assets/images/mobile-heading.svg';
-    const DESKTOP_HEADING_SRC =
-        '/real-estate-smart-agent/src/pages/home/assets/images/desktop-heading.svg';
+import { HEADING_TEST_ID } from '../constants/testIds';
 
-    it('should render the heading image', () => {
+import mobileHeadingSVG from '../assets/images/mobile-heading.svg';
+import desktopHeadingSVG from '../assets/images/desktop-heading.svg';
+
+describe('`Heading` component', () => {
+    it('should render with the correct test id', () => {
         // Setup
         render(
             <Router>
@@ -47,7 +45,7 @@ describe('`Heading` component', () => {
 
             // Post Expectations
             expect(mobileHeading).toBeInTheDocument();
-            expect(mobileHeading).toHaveAttribute('src', MOBILE_HEADING_SRC);
+            expect(mobileHeading).toHaveAttribute('src', mobileHeadingSVG);
         });
 
         it('should render the mobile heading image with the correct accessibility attributes', () => {
@@ -89,7 +87,7 @@ describe('`Heading` component', () => {
 
             // Post Expectations
             expect(desktopHeading).toBeInTheDocument();
-            expect(desktopHeading).toHaveAttribute('src', DESKTOP_HEADING_SRC);
+            expect(desktopHeading).toHaveAttribute('src', desktopHeadingSVG);
         });
 
         it('should render the desktop heading image with the correct accessibility attributes', () => {
