@@ -1,10 +1,14 @@
-type QnAPair = {
-    question: string;
-    answer: string;
+/** A pair of a question and an answer. */
+export type QnaPair = {
+    /** @readonly */
+    readonly question: string;
+
+    /** @readonly */
+    readonly answer: string;
 }
 
 /** QnA pairs for the `Content` component of the About page. */
-export const QnAPairs: QnAPair[] = [
+export const qnaPairs: QnaPair[] = [
     {
         question: 'מהי מטרת הפרויקט?',
         answer: 'מטרת הפרויקט היא לפשט את תהליך חיפוש נכסי נדל"ן למכירה או להשכרה מאתר יד2.'
