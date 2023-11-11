@@ -1,3 +1,5 @@
+import { HEADING_TEST_ID } from '../constants/testIds';
+
 /**
  * The heading component of the About page
  * @returns The React.JSX heading element
@@ -9,9 +11,8 @@ export default function Heading(): React.JSX.Element {
             style={{
                 textShadow:
                     '1px 1px 0 #001f24, -1px -1px 0 #001f24, 1px -1px 0 #001f24, -1px 1px 0 #001f24, 1px 1px 0 #001f24',
-                gridArea: 'text',
             }}
-            data-testid="About Page Heading"
+            data-testid={HEADING_TEST_ID}
         >
             אודות הפרויקט:
         </h1>

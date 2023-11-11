@@ -1,4 +1,5 @@
 import illustrationSvg from '../assets/images/about-illustration.svg';
+import { ILLUSTRATION_TEST_ID } from '../constants/testIds';
 
 /**
  * The illustration component of the about page - an SVG image of three hands drawing a light bulb on a background of gears and leaves
@@ -13,7 +14,7 @@ export default function Illustration(): React.JSX.Element {
             type="image/svg+xml"
             aria-roledescription="Illustration"
             aria-label="איור של שלוש ידיים מציירות נורה דולקת על רקע גלגלי שיניים ועלים"
-            data-testid="About Page Illustration"
+            data-testid={ILLUSTRATION_TEST_ID}
         />
     );
 }

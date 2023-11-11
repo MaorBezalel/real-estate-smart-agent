@@ -1,21 +1,28 @@
 import Heading from './Heading';
-import QnA from './QnA';
+import Qna from './Qna';
 
-import { QnAPairs } from '../constants/QnAPair';
+import { QnaPair } from '../constants/qnaPairs';
+import { CONTENT_TEST_ID } from '../constants/testIds';
+
+/** The props for the `Content` component */
+type ContentProps = {
+    qnaPairs: QnaPair[];
+};
 
 /**
- * The content component of the About page
+ * The `Content` component of the About page
+ * @param {ContentProps} props The props for the `Content` component
  * @returns The React.JSX content element
  */
-export default function Content(): React.JSX.Element {
+export default function Content({ qnaPairs }: ContentProps): React.JSX.Element {
     return (
         <div
             className="flex flex-col gap-6 tablet-lg:text-start"
-            data-testid="About Page Content"
+            data-testid={CONTENT_TEST_ID}
         >
             <Heading />
-            {QnAPairs.map((pair, index) => (
-                <QnA
+            {qnaPairs.map((pair, index) => (
+                <Qna
                     key={index}
                     number={index + 1}
                     question={pair.question}

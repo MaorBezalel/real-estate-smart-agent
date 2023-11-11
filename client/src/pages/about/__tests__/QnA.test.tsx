@@ -1,36 +1,34 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 
-import QnA from '../components/QnA';
+import Qna from '../components/Qna';
+
+import {
+    QNA_SECTION_TEST_ID,
+    QNA_QUESTION_TEST_ID,
+    QNA_ANSWER_TEST_ID,
+} from '../constants/testIds';
 
 describe('`QnA` component', () => {
-    // Constants
-    const QUESTION_TEST_ID = 'QnA Question';
-    const ANSWER_TEST_ID = 'QnA Answer';
-    const QNA_SECTION_TEST_ID = 'QnA Section';
-
     // Fake Data
     const QUESTION_NUMBER = 1;
     const QUESTION = 'What is the name of my cat?';
     const ANSWER = 'MEOW!';
 
-    it('should render the question and answer', () => {
+    it('should render with the correct test id', () => {
         // Setup
         render(
-            <QnA number={QUESTION_NUMBER} question={QUESTION} answer={ANSWER} />
+            <Qna number={QUESTION_NUMBER} question={QUESTION} answer={ANSWER} />
         );
 
         // Post Expectations
-        expect(screen.getByTestId(QUESTION_TEST_ID)).toHaveTextContent(
-            QUESTION
-        );
-        expect(screen.getByTestId(ANSWER_TEST_ID)).toHaveTextContent(ANSWER);
+        expect(screen.getByTestId(QNA_SECTION_TEST_ID)).toBeInTheDocument();
     });
 
-    it('should have the correct accessibility attributes', () => {
+    it('should render with the correct accessibility attributes', () => {
         // Setup
         render(
-            <QnA number={QUESTION_NUMBER} question={QUESTION} answer={ANSWER} />
+            <Qna number={QUESTION_NUMBER} question={QUESTION} answer={ANSWER} />
         );
 
         // Post Expectations
@@ -38,13 +36,105 @@ describe('`QnA` component', () => {
             'aria-label',
             `שאלה ותשובה מספר ${QUESTION_NUMBER}`
         );
-        expect(screen.getByTestId(QUESTION_TEST_ID)).toHaveAttribute(
-            'aria-label',
-            `שאלה מספר ${QUESTION_NUMBER}`
-        );
-        expect(screen.getByTestId(ANSWER_TEST_ID)).toHaveAttribute(
-            'aria-label',
-            `תשובה לשאלה מספר ${QUESTION_NUMBER}`
-        );
+    });
+
+    describe('when looking at the question', () => {
+        it('should render with the correct test id', () => {
+            // Setup
+            render(
+                <Qna
+                    number={QUESTION_NUMBER}
+                    question={QUESTION}
+                    answer={ANSWER}
+                />
+            );
+
+            // Post Expectations
+            expect(
+                screen.getByTestId(QNA_QUESTION_TEST_ID)
+            ).toBeInTheDocument();
+        });
+
+        it('should display the correct text', () => {
+            // Setup
+            render(
+                <Qna
+                    number={QUESTION_NUMBER}
+                    question={QUESTION}
+                    answer={ANSWER}
+                />
+            );
+
+            // Post Expectations
+            expect(screen.getByTestId(QNA_QUESTION_TEST_ID)).toHaveTextContent(
+                QUESTION
+            );
+        });
+
+        it('should have the correct accessibility attributes', () => {
+            // Setup
+            render(
+                <Qna
+                    number={QUESTION_NUMBER}
+                    question={QUESTION}
+                    answer={ANSWER}
+                />
+            );
+
+            // Post Expectations
+            expect(screen.getByTestId(QNA_QUESTION_TEST_ID)).toHaveAttribute(
+                'aria-label',
+                `שאלה מספר ${QUESTION_NUMBER}`
+            );
+        });
+    });
+
+    describe('when looking at the answer', () => {
+        it('should render with the correct test id', () => {
+            // Setup
+            render(
+                <Qna
+                    number={QUESTION_NUMBER}
+                    question={QUESTION}
+                    answer={ANSWER}
+                />
+            );
+
+            // Post Expectations
+            expect(screen.getByTestId(QNA_ANSWER_TEST_ID)).toBeInTheDocument();
+        });
+
+        it('should display the correct text', () => {
+            // Setup
+            render(
+                <Qna
+                    number={QUESTION_NUMBER}
+                    question={QUESTION}
+                    answer={ANSWER}
+                />
+            );
+
+            // Post Expectations
+            expect(screen.getByTestId(QNA_ANSWER_TEST_ID)).toHaveTextContent(
+                ANSWER
+            );
+        });
+
+        it('should have the correct accessibility attributes', () => {
+            // Setup
+            render(
+                <Qna
+                    number={QUESTION_NUMBER}
+                    question={QUESTION}
+                    answer={ANSWER}
+                />
+            );
+
+            // Post Expectations
+            expect(screen.getByTestId(QNA_ANSWER_TEST_ID)).toHaveAttribute(
+                'aria-label',
+                `תשובה לשאלה מספר ${QUESTION_NUMBER}`
+            );
+        });
     });
 });

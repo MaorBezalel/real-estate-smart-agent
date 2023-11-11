@@ -3,13 +3,14 @@ import { describe, it, expect } from 'vitest';
 
 import AboutPage from '../AboutPage';
 
-describe('`AboutPage` component', () => {
-    // Constants
-    const ABOUT_PAGE_TEST_ID = 'About Page';
-    const ILLUSTRATION_TEST_ID = 'About Page Illustration';
-    const CONTENT_TEST_ID = 'About Page Content';
+import {
+    ABOUT_PAGE_TEST_ID,
+    ILLUSTRATION_TEST_ID,
+    CONTENT_TEST_ID,
+} from '../constants/testIds';
 
-    it('should render the `AboutPage` component', () => {
+describe('`AboutPage` component', () => {
+    it('should render with the correct test id', () => {
         // Setup
         render(<AboutPage />);
 
@@ -17,7 +18,7 @@ describe('`AboutPage` component', () => {
         expect(screen.getByTestId(ABOUT_PAGE_TEST_ID)).toBeInTheDocument();
     });
 
-    it('should render the `AboutPage` component with the correct accessibility attributes', () => {
+    it('should render with the correct accessibility attributes', () => {
         // Setup
         render(<AboutPage />);
         const aboutPage = screen.getByTestId(ABOUT_PAGE_TEST_ID);

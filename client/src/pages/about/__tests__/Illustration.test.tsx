@@ -5,7 +5,7 @@ describe('`Illustration` component', () => {
     // Constants
     const ILLUSTRATION_TEST_ID = 'About Page Illustration';
 
-    it('should render the SVG image', () => {
+    it('should render with the correct test id', () => {
         // Setup
         render(<Illustration />);
 
@@ -13,17 +13,17 @@ describe('`Illustration` component', () => {
         expect(screen.getByTestId(ILLUSTRATION_TEST_ID)).toBeInTheDocument();
     });
 
-    it('should render the SVG image with the correct accessibility attributes', () => {
+    it('should render with the correct accessibility attributes', () => {
         // Setup
         render(<Illustration />);
-        const animation = screen.getByTestId(ILLUSTRATION_TEST_ID);
+        const illustration = screen.getByTestId(ILLUSTRATION_TEST_ID);
 
         // Post Expectations
-        expect(animation).toHaveAttribute(
+        expect(illustration).toHaveAttribute(
             'aria-label',
             'איור של שלוש ידיים מציירות נורה דולקת על רקע גלגלי שיניים ועלים'
         );
-        expect(animation).toHaveAttribute(
+        expect(illustration).toHaveAttribute(
             'aria-roledescription',
             'Illustration'
         );
@@ -32,10 +32,10 @@ describe('`Illustration` component', () => {
     it('should be positioned in the correct grid area', () => {
         // Setup
         render(<Illustration />);
-        const animation = screen.getByTestId(ILLUSTRATION_TEST_ID);
+        const illustration = screen.getByTestId(ILLUSTRATION_TEST_ID);
 
         // Post Expectations
-        expect(animation).toHaveStyle({
+        expect(illustration).toHaveStyle({
             gridArea: 'illustration',
         });
     });
