@@ -5,6 +5,10 @@ import desktopHeading from '../assets/images/desktop-heading.svg';
 
 import { HEADING_TEST_ID } from '../constants/testIds';
 
+/**
+ * Renders the heading component with a responsive image.
+ * @returns {React.JSX.Element} The heading component.
+ */
 export default function Heading(): React.JSX.Element {
     const isRowLayout = useMediaQuery('(max-width: 1023px)');
 

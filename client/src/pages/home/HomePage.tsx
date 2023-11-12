@@ -4,6 +4,10 @@ import Cta from './components/Cta';
 
 import { HOME_PAGE_TEST_ID } from './constants/testIds';
 
+/**
+ * Renders the home page of the application.
+ * @returns {React.JSX.Element} The home page component.
+ */
 export default function HomePage(): React.JSX.Element {
     return (
         <main

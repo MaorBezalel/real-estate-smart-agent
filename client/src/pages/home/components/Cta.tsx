@@ -6,6 +6,10 @@ import {
     CTA_ABOUT_LINK_ITEM_TEST_ID,
 } from '../constants/testIds';
 
+/**
+ * Renders a Call To Action component with links to other pages.
+ * @returns {React.JSX.Element} The CTA component.
+ */
 export default function Cta(): React.JSX.Element {
     return (
         <div

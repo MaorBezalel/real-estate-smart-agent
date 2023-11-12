@@ -1,3 +1,7 @@
+/**
+ * Renders an illustration component for the home page using Lottie animation.
+ * @returns {React.JSX.Element} The illustration component.
+ */
 import Lottie from 'lottie-react';
 import animationJSON from '../assets/animations/estate-search-animation.json';
 import { ILLUSTRATION_TEST_ID } from '../constants/testIds';
