@@ -10,9 +10,9 @@ type ContentProps = {
 };
 
 /**
- * The `Content` component of the About page
- * @param {ContentProps} props The props for the `Content` component
- * @returns The React.JSX content element
+ * Renders the text content of the About page.
+ * @param {ContentProps} props - The props object containing the question-answer pairs.
+ * @returns {React.JSX.Element} - The rendered component.
  */
 export default function Content({ qnaPairs }: ContentProps): React.JSX.Element {
     return (

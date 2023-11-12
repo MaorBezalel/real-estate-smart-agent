@@ -2,8 +2,8 @@ import illustrationSvg from '../assets/images/about-illustration.svg';
 import { ILLUSTRATION_TEST_ID } from '../constants/testIds';
 
 /**
- * The illustration component of the about page - an SVG image of three hands drawing a light bulb on a background of gears and leaves
- * @returns The React.JSX illustration element
+ * Renders an SVG illustration component for the About page.
+ * @returns {React.JSX.Element} The rendered component.
  */
 export default function Illustration(): React.JSX.Element {
     return (

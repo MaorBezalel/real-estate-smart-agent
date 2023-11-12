@@ -1,8 +1,8 @@
 import { HEADING_TEST_ID } from '../constants/testIds';
 
 /**
- * The heading component of the About page
- * @returns The React.JSX heading element
+ * Renders a heading component with a specific style and text for the About page.
+ * @returns {React.JSX.Element} The rendered component.
  */
 export default function Heading(): React.JSX.Element {
     return (

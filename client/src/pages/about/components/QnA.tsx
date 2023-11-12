@@ -17,9 +17,9 @@ type QnaProps = {
 };
 
 /**
- * The QnA section component of the About page
- * @param {QnaProps} props The props
- * @returns The React.JSX element
+ * Renders a question and answer section component for the About page
+ * @param {QnaProps} props - The props object containing the number, question, and answer.
+ * @returns {React.JSX.Element} - The rendered component.
  */
 export default function Qna({
     number,
