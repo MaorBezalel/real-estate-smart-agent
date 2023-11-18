@@ -1,4 +1,4 @@
-import { InitialYad2RealEstateResponse, FinalYad2RealEstateResponse, Yad2RealEstateItem, Yad2AdvertisementItem } from "src/real-estate/types/yad2.responses";
+import { InitialYad2RealEstateResponse, FinalYad2RealEstateResponse } from "src/real-estate/types/yad2.responses";
 import { dummyRealEstateItems } from "./real-estate-items.dummy";
 import { dummyFinalSearchFilter } from "./search-filter.dummy";
 import { dummyYad2RealEstateItems, dummyYad2AdvertisementItems } from "./yad2-items.dummy";

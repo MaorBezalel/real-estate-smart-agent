@@ -19,6 +19,7 @@ export const dummyYad2RealEstateItems = (): Yad2RealEstateItem[] => [
     {
         id: 'lpoc1l9r',
         title_1: 'סומקן 26',
+        neighborhood: 'נווה צדק',
         title_2: 'דירה',
         highlight_text: '',
         price: '1,900,000 ₪',
@@ -41,6 +42,7 @@ export const dummyYad2RealEstateItems = (): Yad2RealEstateItem[] => [
     {
         id: 'qk0s7rss',
         title_1: 'שדרות הבעש"ט 9',
+        neighborhood: 'רמת יוסף',
         title_2: 'דירה',
         highlight_text: '',
         price: '1,750,000 ₪',
@@ -63,6 +65,7 @@ export const dummyYad2RealEstateItems = (): Yad2RealEstateItem[] => [
     {
         id: 'e1fw2lzh',
         title_1: 'חנוך 4',
+        neighborhood: 'אגרובנק',
         title_2: 'בית פרטי/קוטג\'',
         highlight_text: '',
         price: '1,450,000 ₪',
@@ -85,6 +88,7 @@ export const dummyYad2RealEstateItems = (): Yad2RealEstateItem[] => [
     {
         id: 'ah2t2l1h',
         title_1: 'שושנה 4',
+        neighborhood: 'גסי כהן',
         title_2: 'בית פרטי/קוטג\'',
         highlight_text: 'תיווך',
         price: '2,500,000 ₪',

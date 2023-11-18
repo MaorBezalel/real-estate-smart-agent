@@ -60,7 +60,7 @@ describe('RealEstateModule (e2e)', () => {
                     maxPrice: 2_000_000,
                 })
                 .expect(404);
-            
+
             expect(response.body.message).toBe(`City ${nonExistentCity} not found`);
         });
     });
@@ -76,6 +76,7 @@ describe('RealEstateModule (e2e)', () => {
                 .expect(200);
 
             expect(response.body.items).toBeDefined();
+            expect(response.body.search_filter).toBeDefined();
             expect(response.body.total_pages).toBeDefined();
         });
 

@@ -16,16 +16,17 @@ export class RealEstateApiService {
      * Constructor for RealEstateApiService.
      * @param httpService HttpService instance for making HTTP requests.
     */
-    constructor(private readonly httpService: HttpService) {}
+    constructor(private readonly httpService: HttpService) { }
 
     /**
      * Fetches the initial search results from Yad2 API.
      * @param initialSearchFilter The initial search filter.
      * @returns The initial search results.
     */
-    async fetchInitialSearchResults(initialSearchFilter: InitialSearchFilter): Promise<FinalYad2RealEstateResponse>  {
+    async fetchInitialSearchResults(initialSearchFilter: InitialSearchFilter): Promise<FinalYad2RealEstateResponse> {
         const finalSearchFilter: FinalSearchFilter = {
             type: initialSearchFilter.type,
+            city: initialSearchFilter.city,
             city_code: await this.fetchCityCodeFromYad2(initialSearchFilter.city),
             min_price: initialSearchFilter.min_price,
             max_price: initialSearchFilter.max_price,
@@ -41,7 +42,7 @@ export class RealEstateApiService {
      * @param updatedSearchFilter The updated search filter.
      * @returns The updated search results.
     */
-    async fetchUpdatedSearchResults(updatedSearchFilter: FinalSearchFilter): Promise<FinalYad2RealEstateResponse>  {
+    async fetchUpdatedSearchResults(updatedSearchFilter: FinalSearchFilter): Promise<FinalYad2RealEstateResponse> {
         const url: string = this.generateRequestUrlForYad2(updatedSearchFilter);
         return await this.fetchDataFromYad2(url, updatedSearchFilter);
     }
@@ -57,24 +58,24 @@ export class RealEstateApiService {
         return await lastValueFrom(this.httpService.get<InitialYad2RealEstateResponse>(url, {
             headers: YAD2_REQUEST_HEADERS
         })
-        .pipe(
-            map(res => res.data?.data.feed),
-            map(feed => {
-                return {
-                    data: {
-                        feed_items: feed.feed_items.map(item => this.extractOnlyRealEstateData(item)).filter(item => item),
-                        searchFilter,
-                        total_pages: feed.total_pages
-                    },
-                    message: 'OK'
-                }
-            })
-        )
-        .pipe(
-            catchError(_ => {
-                throw new ServiceUnavailableException('Yad2 API not available, please try again later');
-            })
-        ));
+            .pipe(
+                map(res => res.data?.data.feed),
+                map(feed => {
+                    return {
+                        data: {
+                            feed_items: feed.feed_items.map(item => this.extractOnlyRealEstateData(item)).filter(item => item),
+                            searchFilter,
+                            total_pages: feed.total_pages
+                        },
+                        message: 'OK'
+                    }
+                })
+            )
+            .pipe(
+                catchError(_ => {
+                    throw new ServiceUnavailableException('Yad2 API not available, please try again later');
+                })
+            ));
     }
 
     /**
@@ -90,7 +91,7 @@ export class RealEstateApiService {
         const priceField = `price=${searchFilter.min_price}-${searchFilter.max_price}`;
         const pageField = `page=${(searchFilter.page >= 0) ? searchFilter.page : 1}`;
         const forceLdLoadField = 'forceLdLoad=true';
-        
+
         return `${baseUrl}/${typeField}?${cityField}&${propertyGroupField}&${priceField}&${pageField}&${forceLdLoadField}`;
     }
 
@@ -106,20 +107,20 @@ export class RealEstateApiService {
             `${process.env.YAD2_CITY_CODE_REQUEST_URL}?text=${encodeURIComponent(city)}`, {
             headers: YAD2_REQUEST_HEADERS
         })
-        .pipe(
-            map(res => {
-                if (!res.data?.length) throw new NotFoundException(`City ${city} not found`);
-                return res.data[0].value.city;
-            })
-        )
-        .pipe(
-            catchError(error => {
-                if (error instanceof NotFoundException) throw error;
-                throw new ServiceUnavailableException('Yad2 API not available, please try again later');
-            })
-        ));
+            .pipe(
+                map(res => {
+                    if (!res.data?.length) throw new NotFoundException(`City ${city} not found`);
+                    return res.data[0].value.city;
+                })
+            )
+            .pipe(
+                catchError(error => {
+                    if (error instanceof NotFoundException) throw error;
+                    throw new ServiceUnavailableException('Yad2 API not available, please try again later');
+                })
+            ));
     }
-    
+
     /**
      * Extracts only the necessary real estate data from the item.
      * @param item The item to extract the real estate data from.
@@ -138,6 +139,7 @@ export class RealEstateApiService {
             id: item.id,
             type: item.title_2,
             street: item.title_1,
+            neighborhood: item.neighborhood,
             rooms: item.row_4[0].value,
             floor: item.row_4[1].value,
             squareMeters: item.row_4[2].value,

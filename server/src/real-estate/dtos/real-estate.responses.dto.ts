@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { RealEstate } from './real-estate.item.dto';
+import { FinalSearchFilter } from '../types/search-filter.objects';
 
 /**
  * Represents the response returned by the server when a client requests the initial search results for real estate.
@@ -39,6 +40,13 @@ export class GetUpdatedSearchResultsResponse {
         description: 'The latest up to date real estate items.',
     })
     items: RealEstate[];
+
+    /** The search filter that was used and will be used to fetch updated data. */
+    @ApiProperty({
+        type: Object,
+        description: 'The search filter that was used and will be used to fetch updated data.',
+    })
+    search_filter: FinalSearchFilter;
 
     /** The total number of pages that real estate data can be fetched from. */
     @ApiProperty({

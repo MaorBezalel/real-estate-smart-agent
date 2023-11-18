@@ -13,7 +13,7 @@ import { dummyFinalYad2RealEstateResponse } from './dummy/yad2.response.dummy';
 import { dummyInitialSearchFilter } from './dummy/search-filter.dummy';
 import { dummyDocument, dummyId } from './dummy/document.dummy';
 import { dummyRealEstateDocumentModel } from './dummy/real-estate.model.dummy';
-import {dummyInitialSearchResultsResponse, dummyUpdatedSearchResultsResponse} from './dummy/search-results.dummy';
+import { dummyInitialSearchResultsResponse, dummyUpdatedSearchResultsResponse } from './dummy/search-results.dummy';
 
 describe('RealEstateController', () => {
     let controller: RealEstateController;
@@ -97,9 +97,9 @@ describe('RealEstateController', () => {
 
         beforeAll(async () => {
             searchId = dummyId;
-            page =  1;
+            page = 1;
         });
-        
+
         beforeEach(async () => {
             response = await controller.getUpdatedSearchResults(searchId, page);
         });
@@ -136,7 +136,7 @@ describe('RealEstateController', () => {
             const page = document.total_pages + 1;
 
             await expect(controller.getUpdatedSearchResults(searchId, page)).rejects.toThrow(new NotFoundException(
-                `Page ${page} not found (total pages: ${document.total_pages}!)`
+                `Page ${page} not found (total pages: ${document.total_pages})`
             ));
         });
     });
@@ -144,7 +144,7 @@ describe('RealEstateController', () => {
     describe('#cancelSearch', () => {
         it('should call `deleteDocumentById` once and with the correct arguments', async () => {
             const serachId: string = dummyId;
-            
+
             await controller.cancelSearch(serachId);
 
             expect(dbService.deleteDocumentById).toBeCalledTimes(1);

@@ -4,7 +4,7 @@ import { ApiTags, ApiResponse, ApiOperation, ApiNotFoundResponse, ApiServiceUnav
 import { RealEstateApiService } from '../services/real-estate.api.service';
 import { RealEstateDbService } from '../services/real-estate.db.service';
 import { InitialSearchFilter, FinalSearchFilter } from '../types/search-filter.objects';
-import { GetInitialSearchResultsResponse, GetUpdatedSearchResultsResponse} from '../dtos/real-estate.responses.dto';
+import { GetInitialSearchResultsResponse, GetUpdatedSearchResultsResponse } from '../dtos/real-estate.responses.dto';
 
 /**
  * Controller for the real estate API.
@@ -18,9 +18,9 @@ export class RealEstateController {
      * @param realEstateDbService RealEstateDbService instance for fetching data from the database.
     */
     constructor(
-        private readonly realEstateApiService: RealEstateApiService, 
+        private readonly realEstateApiService: RealEstateApiService,
         private readonly realEstateDbService: RealEstateDbService
-    ) {}
+    ) { }
 
     /**
      * Fetches the initial search results from Yad2 API and saves them in the database.
@@ -41,7 +41,7 @@ export class RealEstateController {
     @ApiQuery({ name: 'city', description: 'The city of the real estate.' })
     @ApiQuery({ name: 'minPrice', description: 'The minimum price of the real estate.' })
     @ApiQuery({ name: 'maxPrice', description: 'The maximum price of the real estate.' })
-    @ApiResponse({ status: HttpStatus.OK, description: 'The initial search results.', type: GetInitialSearchResultsResponse})
+    @ApiResponse({ status: HttpStatus.OK, description: 'The initial search results.', type: GetInitialSearchResultsResponse })
     @ApiNotFoundResponse({ status: HttpStatus.NOT_FOUND, description: 'The data for the requested city was not found.' })
     @ApiServiceUnavailableResponse({ status: HttpStatus.SERVICE_UNAVAILABLE, description: 'The Yad2 API is not available.' })
     @ApiInternalServerErrorResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: 'An error occurred while inserting the document to the database.' })
@@ -94,7 +94,7 @@ export class RealEstateController {
         @Query('page') page: number
     ): Promise<GetUpdatedSearchResultsResponse> {
         const document = await this.realEstateDbService.getDocumentById(searchId);
-        
+
         if (page > document.total_pages) {
             throw new NotFoundException(`Page ${page} not found (total pages: ${document.total_pages})`);
         }
@@ -112,6 +112,7 @@ export class RealEstateController {
 
         return {
             items: response.data.feed_items,
+            search_filter: response.data.searchFilter,
             total_pages: response.data.total_pages
         }
     }

@@ -27,6 +27,14 @@ export class RealEstate {
     })
     street: string;
 
+    /** The neighborhood of the real estate object. */
+    @ApiProperty({
+        type: String,
+        description: 'The neighborhood of the real estate object.',
+        example: 'רמת יוסף'
+    })
+    neighborhood: string;
+
     /** The number of rooms in the real estate object. */
     @ApiProperty({
         type: Number,
