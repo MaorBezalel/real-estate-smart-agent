@@ -30,7 +30,7 @@ export class RealEstateApiService {
             city_code: await this.fetchCityCodeFromYad2(initialSearchFilter.city),
             min_price: initialSearchFilter.min_price,
             max_price: initialSearchFilter.max_price,
-            page: 1
+            page: initialSearchFilter.page
         }
         const url: string = this.generateRequestUrlForYad2(finalSearchFilter);
 

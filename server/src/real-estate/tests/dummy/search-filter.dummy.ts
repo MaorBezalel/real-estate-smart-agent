@@ -5,6 +5,7 @@ export const dummyInitialSearchFilter = (): InitialSearchFilter => ({
     city: 'עיר דמיונית',
     min_price: 1_000_000,
     max_price: 2_000_000,
+    page: 1,
 });
 
 export const dummyFinalSearchFilter = (): FinalSearchFilter => ({

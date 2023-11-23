@@ -3,7 +3,10 @@ import { ApiTags, ApiResponse, ApiOperation, ApiNotFoundResponse, ApiServiceUnav
 
 import { RealEstateApiService } from '../services/real-estate.api.service';
 import { RealEstateDbService } from '../services/real-estate.db.service';
+
 import { InitialSearchFilter, FinalSearchFilter } from '../types/search-filter.objects';
+import { FinalYad2RealEstateResponse } from '../types/yad2.responses';
+
 import { GetInitialSearchResultsResponse, GetUpdatedSearchResultsResponse } from '../dtos/real-estate.responses.dto';
 
 /**
@@ -37,10 +40,11 @@ export class RealEstateController {
     @HttpCode(HttpStatus.OK)
     @ApiTags('real-estate')
     @ApiOperation({ summary: 'Fetches the initial search results from Yad2 API and saves them in the database.' })
-    @ApiParam({ name: 'type', description: 'The type of the real estate (forsale or rent).' })
-    @ApiQuery({ name: 'city', description: 'The city of the real estate.' })
-    @ApiQuery({ name: 'minPrice', description: 'The minimum price of the real estate.' })
-    @ApiQuery({ name: 'maxPrice', description: 'The maximum price of the real estate.' })
+    @ApiParam({ name: 'type', description: 'The type of the real estate (forsale or rent).', required: true })
+    @ApiQuery({ name: 'city', description: 'The city of the real estate.', required: true })
+    @ApiQuery({ name: 'minPrice', description: 'The minimum price of the real estate.', required: true })
+    @ApiQuery({ name: 'maxPrice', description: 'The maximum price of the real estate.', required: true })
+    @ApiQuery({ name: 'page', description: 'The page number to fetch data from.', required: false })
     @ApiResponse({ status: HttpStatus.OK, description: 'The initial search results.', type: GetInitialSearchResultsResponse })
     @ApiNotFoundResponse({ status: HttpStatus.NOT_FOUND, description: 'The data for the requested city was not found.' })
     @ApiServiceUnavailableResponse({ status: HttpStatus.SERVICE_UNAVAILABLE, description: 'The Yad2 API is not available.' })
@@ -49,16 +53,18 @@ export class RealEstateController {
         @Param('type') type: 'forsale' | 'rent',
         @Query('city') city: string,
         @Query('minPrice') min_price: number,
-        @Query('maxPrice') max_price: number
+        @Query('maxPrice') max_price: number,
+        @Query('page') page?: number
     ): Promise<GetInitialSearchResultsResponse> {
         const searchFilter: InitialSearchFilter = {
             type,
             city,
             min_price,
-            max_price
+            max_price,
+            page: page || 1
         };
-        const response = await this.realEstateApiService.fetchInitialSearchResults(searchFilter);
-        const searchId = (await this.realEstateDbService.insertNewDocument({
+        const response: FinalYad2RealEstateResponse = await this.realEstateApiService.fetchInitialSearchResults(searchFilter);
+        const searchId: string = (await this.realEstateDbService.insertNewDocument({
             items: response.data.feed_items,
             total_pages: response.data.total_pages,
             search_filter: response.data.searchFilter

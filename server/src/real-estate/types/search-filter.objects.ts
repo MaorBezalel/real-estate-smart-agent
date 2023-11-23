@@ -14,6 +14,9 @@ export type InitialSearchFilter = {
 
     /** The maximum price of real estate properties to search for. */
     max_price: number;
+
+    /** The page number we want to fetch data from. */
+    page?: number;
 };
 
 /**
@@ -37,6 +40,6 @@ export type FinalSearchFilter = {
     /** The maximum price of real estate properties to search for. */
     max_price: number;
 
-    /** The page number we want to fetch data. */
+    /** The page number we want to fetch data from. */
     page: number;
 };

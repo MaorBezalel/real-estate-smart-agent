@@ -69,7 +69,8 @@ describe('RealEstateController', () => {
                 initialSearchFilter.type,
                 initialSearchFilter.city,
                 initialSearchFilter.min_price,
-                initialSearchFilter.max_price
+                initialSearchFilter.max_price,
+                initialSearchFilter.page
             );
         });
 
