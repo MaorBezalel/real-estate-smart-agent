@@ -66,6 +66,9 @@ export type Yad2RealEstateItem = {
     /** The neighborhood of the real estate. */
     neighborhood: string;
 
+    /** The city of the real estate. */
+    city: string;
+
     /** The type of real estate asset (e.g. apartment, house, etc.). */
     title_2: string;
 
