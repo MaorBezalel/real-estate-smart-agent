@@ -51,7 +51,6 @@ export class RealEstateApiService {
             cityCode: await this.fetchCityCodeFromYad2(requestParams.city)
         };
         const url = yad2RealEstateRequestURL(process.env.YAD2_REAL_ESTATE_REQUEST_URL, yad2RequestSearchParams);
-        console.log(url);
 
         const yad2Data: Yad2RealEstateResponse = await this.fetchYad2RealEstateData(url);
         const realEstateData: RealEstate[] = extractOnlyRealEstateData(yad2Data);
@@ -70,6 +69,7 @@ export class RealEstateApiService {
     /**
      * Fetches the updated real estate data based on the provided request parameters.
      * @param {ApiServiceUpdatedRequestParams} requestParams The request parameters for fetching the data.
+     * @param {RealEstateDocumentModel} previousData The previous data fetched from the database.
      * @returns {Promise<ApiServiceResponse>} A promise that resolves to the fetched data.
      * @throws NotFoundException if the page is not found.
      * @throws ServiceUnavailableException if the Yad2 API is not available.
@@ -82,7 +82,7 @@ export class RealEstateApiService {
 
         const yad2Data = await this.fetchYad2RealEstateData(url);
         const realEstateData: RealEstate[] = extractOnlyRealEstateData(yad2Data);
-        const changedRealEstateData: RealEstate[] = detectChanges(realEstateData, previousData.items);
+        const changedRealEstateData: RealEstate[] = detectChanges(previousData.items, realEstateData);
         const sortedRealEstateData: RealEstate[] = sortRealEstateItemsByDate(changedRealEstateData);
 
         return {
