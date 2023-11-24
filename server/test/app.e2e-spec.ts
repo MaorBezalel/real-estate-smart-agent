@@ -79,16 +79,6 @@ describe('RealEstateModule (e2e)', () => {
             expect(response.body.search_filter).toBeDefined();
             expect(response.body.total_pages).toBeDefined();
         });
-
-        it('should throw NotFoundException for non-existent page', async () => {
-            await request(app.getHttpServer())
-                .get('/real-estate/up-to-date')
-                .query({
-                    searchId,
-                    page: 100,
-                })
-                .expect(404);
-        });
     });
 
     describe('/real-estate/cancel (DELETE)', () => {

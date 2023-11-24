@@ -1,60 +1,3 @@
-import { RealEstate } from '../dtos/real-estate.item.dto';
-import { FinalSearchFilter } from './search-filter.objects';
-
-export type InitialYad2RealEstateResponse = {
-    /** The data returned by the API. */
-    data: {
-        /** The feed object containing the feed items and total pages. */
-        feed: {
-            /** An array of feed items each containing the data of a real estate property. */
-            feed_items: (Yad2RealEstateItem | Yad2AdvertisementItem)[];
-
-            /** The total number of pages containing feed items. */
-            total_pages: number;
-
-            /** Any additional properties returned by the API. */
-            [key: string]: unknown;
-        }
-
-        /** Any additional properties returned by the API. */
-        [key: string]: unknown;
-    };
-
-    /** A message returned by the API. */
-    message: string;
-}
-
-export type FinalYad2RealEstateResponse = {
-    /** The data returned by the API. */
-    data: {
-        /** An array of real estate items. */
-        feed_items: RealEstate[];
-
-        /** The search filter used to fetch the data. */
-        searchFilter: FinalSearchFilter;
-
-        /** The total number of pages in the response. */
-        total_pages: number;
-    };
-
-    /** A message returned by the API. */
-    message: string;
-}
-
-export type Yad2CityCodeResponse = {
-    /** The data returned by the API which contain various codes */
-    value: {
-        /** The city code of the city. */
-        city: string;
-
-        /** Additional codes that may be present in this data object. */
-        [key: string]: unknown;
-    }
-
-    /** Additional properties that may be present in this data object. */
-    [key: string]: unknown;
-}
-
 /** Represents a real estate property of a feed item in the initial Yad2 response. */
 export type Yad2RealEstateItem = {
     /** The ID of the real estate. Also serves as a link token to the item's detailed page. */
@@ -79,8 +22,11 @@ export type Yad2RealEstateItem = {
         SquareMetersData
     ];
 
-    /** The date the feed item was last updated. */
-    date: Date;
+    /** 
+     * The date the feed item was last updated. 
+     * @remarks It comes as a string in the format of 'YYYY-MM-DD HH:MM:SS'. Can be converted to a Date object using new Date(dateString).
+    */
+    date: string;
 
     /** The price of the real estate. */
     price: string;

@@ -1,0 +1,39 @@
+/**
+ * Represents the initial request parameters for the API service.
+ */
+export type ApiServiceInitialRequestParams = {
+    /** The type of real estate request, either 'forsale' or 'rent'. */
+    dealType: 'forsale' | 'rent';
+
+    /** The city to search for real estate properties in. */
+    city: string;
+
+    /** The minimum price of real estate properties to search for. */
+    minPrice: number;
+
+    /** The maximum price of real estate properties to search for. */
+    maxPrice: number;
+
+    /** The page number we want to fetch data from. */
+    page: number;
+}
+
+/**
+ * Represents the parameters for an updated API service request.
+ */
+export type ApiServiceUpdatedRequestParams = {
+    /** The type of real estate request, either 'forsale' or 'rent'. */
+    dealType: 'forsale' | 'rent';
+
+    /** The city code to search for real estate properties in. */
+    cityCode: string;
+
+    /** The minimum price of real estate properties to search for. */
+    minPrice: number;
+
+    /** The maximum price of real estate properties to search for. */
+    maxPrice: number;
+
+    /** The page number we want to fetch data from. */
+    page: number;
+}

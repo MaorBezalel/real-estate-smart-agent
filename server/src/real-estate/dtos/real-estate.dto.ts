@@ -2,13 +2,22 @@ import { ApiProperty } from '@nestjs/swagger';
 
 /** Represents a real estate object. */
 export class RealEstate {
+    //** Helps the client to determine if the item is new, updated, or default. */
+    @ApiProperty({
+        type: String,
+        description: 'Helps the client to determine if the item is new, updated, or default.',
+        example: 'new',
+        examples: ['new', 'updated', 'default']
+    })
+    status: 'new' | 'updated' | 'default';
+
     /** The unique identifier of the real estate object. Also serves as a link token to the item's detailed page. */
     @ApiProperty({
         type: String,
         description: 'The unique identifier of the real estate object. Also serves as a link token to the item\'s detailed page.',
         example: 'vmurovih'
     })
-    id: string;
+    linkToken: string;
 
     /** The type of the real estate object (e.g. apartment, house, etc.). */
     @ApiProperty({
@@ -17,7 +26,7 @@ export class RealEstate {
         example: 'דירה',
         examples: ['דירה', 'דירת גן', 'פנטהאוז']
     })
-    type: string;
+    estateType: string;
 
     /** The street address of the real estate object. */
     @ApiProperty({
@@ -60,7 +69,7 @@ export class RealEstate {
         example: 4,
         examples: ['קרקע', 2]
     })
-    floor: string | number;
+    floor: number | 'קרקע';
 
     /** The square meters of the real estate object. */
     @ApiProperty({
@@ -76,7 +85,7 @@ export class RealEstate {
         description: 'The date when the real estate object was last updated in yad2 website.',
         example: '2021-08-01 12:00:00'
     })
-    updatedAt: Date;
+    updatedAt: string;
 
     /** The price of the real estate object. */
     @ApiProperty({
