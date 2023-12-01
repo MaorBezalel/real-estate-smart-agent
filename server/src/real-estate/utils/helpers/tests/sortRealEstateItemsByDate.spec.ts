@@ -1,4 +1,4 @@
-import { sortRealEstateItemsByDate } from "../helpers";
+import { sortRealEstateItemsByDate } from "..";
 import { RealEstate } from "../../dtos/real-estate.dto";
 
 describe("sortRealEstateItemsByDate", () => {

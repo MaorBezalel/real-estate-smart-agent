@@ -1,5 +1,5 @@
-import { yad2RealEstateRequestURL } from "../helpers";
-import { Yad2RealEstateRequestParams } from "../types";
+import { yad2RealEstateRequestURL } from "..";
+import { Yad2RealEstateRequestParams } from "../../types";
 
 describe("yad2RealEstateRequestURL", () => {
     it("should generate the correct request URL", () => {

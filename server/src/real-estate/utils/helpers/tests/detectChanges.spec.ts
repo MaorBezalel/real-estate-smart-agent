@@ -1,5 +1,5 @@
 import { RealEstate } from "../../dtos/real-estate.dto";
-import { detectChanges } from "../helpers";
+import { detectChanges } from "..";
 
 describe("detectChanges", () => {
     it(`should return the array with a item that have 'status' property set to 'default'

@@ -1,5 +1,5 @@
-import { RealEstate } from "src/real-estate/dtos/real-estate.dto";
-import { SearchParams } from "src/real-estate/dtos/search-params.dto";
+import { RealEstate } from "src/real-estate/utils/dtos/real-estate.dto";
+import { SearchParams } from "src/real-estate/utils/dtos/search-params.dto";
 
 export type ApiServiceResponse = {
     /** An array of real estate items. */

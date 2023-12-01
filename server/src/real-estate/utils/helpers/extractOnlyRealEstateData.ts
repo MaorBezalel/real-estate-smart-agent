@@ -1,5 +1,5 @@
 import { Yad2RealEstateResponse, Yad2RealEstateItem, Yad2AdvertisementItem } from "../types"
-import { RealEstate } from "../../dtos/real-estate.dto";
+import { RealEstate } from "../dtos/real-estate.dto";
 
 /**
  * Extracts only the real estate data from the Yad2RealEstateResponse.

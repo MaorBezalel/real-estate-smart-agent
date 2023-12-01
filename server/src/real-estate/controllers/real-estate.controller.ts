@@ -1,24 +1,27 @@
 import {
     Controller,
     Get,
+    Post,
     Delete,
-    Param,
     Query,
+    Req,
+    RawBodyRequest,
     HttpCode,
     HttpStatus,
     NotFoundException,
     ServiceUnavailableException,
     InternalServerErrorException,
-
 } from '@nestjs/common';
+import * as rawbody from 'raw-body';
+import { Request } from 'express';
 import {
     ApiTags,
     ApiOperation,
     ApiNotFoundResponse,
     ApiServiceUnavailableResponse,
     ApiInternalServerErrorResponse,
-    ApiParam,
     ApiQuery,
+    ApiBody,
     ApiOkResponse,
     ApiNoContentResponse,
 } from '@nestjs/swagger';
@@ -30,12 +33,12 @@ import {
     ApiServiceInitialRequestParams,
     ApiServiceUpdatedRequestParams,
     ApiServiceResponse,
-} from '../services/types';
+} from '../utils/types';
 
 import {
     GetInitialSearchResultsResponse,
     GetUpdatedSearchResultsResponse,
-} from '../dtos/responses.dto';
+} from '../utils/dtos/responses.dto';
 
 /**
  * Controller for the real estate API.
@@ -59,20 +62,20 @@ export class RealEstateController {
      * @param {string} city The name of the city of the real estate.
      * @param {number} minPrice The minimum price of the real estate.
      * @param {number} maxPrice The maximum price of the real estate.
-     * @throws NotFoundException if the data for the requested city was not found.
-     * @throws NotFoundException if the page is not found.
-     * @throws ServiceUnavailableException if the Yad2 API is not available.
-     * @throws InternalServerErrorException if an error occurred while inserting the document to the database.
+     * @throws {NotFoundException} NotFoundException if the data for the requested city was not found.
+     * @throws {NotFoundException} NotFoundException if the page is not found.
+     * @throws {ServiceUnavailableException} ServiceUnavailableException if the Yad2 API is not available.
+     * @throws {InternalServerErrorException} InternalServerErrorException if an error occurred while inserting the document to the database.
      * @returns {Promise<GetInitialSearchResultsResponse>} A promise that resolves to the fetched data.
      */
-    @Get('search/:dealType')
+    @Get('search')
     @HttpCode(HttpStatus.OK)
     @ApiTags('real-estate')
     @ApiOperation({
         summary:
             'Fetches the initial search results from Yad2 API and saves them in the database.',
     })
-    @ApiParam({
+    @ApiQuery({
         name: 'dealType',
         description: 'The type of the real estate (forsale or rent).',
         required: true,
@@ -102,22 +105,72 @@ export class RealEstateController {
         type: GetInitialSearchResultsResponse,
     })
     @ApiNotFoundResponse({
-        description: 'The data for the requested city was not found.',
+        description: 'The data for the requested city or page was not found.',
+        schema: {
+            type: 'object',
+            properties: {
+                statusCode: {
+                    type: 'number',
+                    example: 404,
+                },
+                message: {
+                    type: 'string',
+                    example: 'Not Found',
+                },
+                error: {
+                    type: 'string',
+                    example: 'Not Found',
+                },
+            },
+        }
     })
     @ApiServiceUnavailableResponse({
         description: 'The Yad2 API is not available.',
+        schema: {
+            type: 'object',
+            properties: {
+                statusCode: {
+                    type: 'number',
+                    example: 503,
+                },
+                message: {
+                    type: 'string',
+                    example: 'Service Unavailable',
+                },
+                error: {
+                    type: 'string',
+                    example: 'Service Unavailable',
+                },
+            },
+        }
     })
     @ApiInternalServerErrorResponse({
-        description: 'An error occurred while inserting the document to the database.',
+        description: 'An error occurred while trying to insert a new document to the database.',
+        schema: {
+            type: 'object',
+            properties: {
+                statusCode: {
+                    type: 'number',
+                    example: 500,
+                },
+                message: {
+                    type: 'string',
+                    example: 'Internal Server Error',
+                },
+                error: {
+                    type: 'string',
+                    example: 'Internal Server Error',
+                },
+            },
+        }
     })
     async getInitialSearchResults(
-        @Param('dealType') dealType: 'forsale' | 'rent',
+        @Query('dealType') dealType: 'forsale' | 'rent',
         @Query('city') city: string,
         @Query('minPrice') minPrice: number,
         @Query('maxPrice') maxPrice: number,
         @Query('page') page?: number,
     ): Promise<GetInitialSearchResultsResponse> {
-        console.log(dealType, city, minPrice, maxPrice, page);
         const requestParams: ApiServiceInitialRequestParams = {
             dealType,
             city,
@@ -143,8 +196,8 @@ export class RealEstateController {
     /**
      * Fetches the updated search results from Yad2 API and updates them in the database.
      * @param {string} searchId The ID of the search.
-     * @throws NotFoundException if a MongoDB document with the given ID was not found.
-     * @throws ServiceUnavailableException if the Yad2 API is not available.
+     * @throws {NotFoundException} NotFoundException if a MongoDB document with the given ID was not found.
+     * @throws {ServiceUnavailableException} ServiceUnavailableException if the Yad2 API is not available.
      * @returns {Promise<GetUpdatedSearchResultsResponse>} A promise that resolves to the fetched data.
      */
     @Get('update')
@@ -164,9 +217,63 @@ export class RealEstateController {
     })
     @ApiNotFoundResponse({
         description: 'A MongoDB document with the given ID was not found.',
+        schema: {
+            type: 'object',
+            properties: {
+                statusCode: {
+                    type: 'number',
+                    example: 404,
+                },
+                message: {
+                    type: 'string',
+                    example: 'Not Found',
+                },
+                error: {
+                    type: 'string',
+                    example: 'Not Found',
+                },
+            },
+        }
     })
     @ApiServiceUnavailableResponse({
         description: 'The Yad2 API is not available.',
+        schema: {
+            type: 'object',
+            properties: {
+                statusCode: {
+                    type: 'number',
+                    example: 503,
+                },
+                message: {
+                    type: 'string',
+                    example: 'Service Unavailable',
+                },
+                error: {
+                    type: 'string',
+                    example: 'Service Unavailable',
+                },
+            },
+        }
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'An error occurred while trying to update the document in the database.',
+        schema: {
+            type: 'object',
+            properties: {
+                statusCode: {
+                    type: 'number',
+                    example: 500,
+                },
+                message: {
+                    type: 'string',
+                    example: 'Internal Server Error',
+                },
+                error: {
+                    type: 'string',
+                    example: 'Internal Server Error',
+                },
+            },
+        }
     })
     async getUpdatedSearchResults(@Query('searchId') searchId: string): Promise<GetUpdatedSearchResultsResponse> {
         const document = await this.realEstateDbService.getDocumentById(searchId);
@@ -189,15 +296,15 @@ export class RealEstateController {
     }
 
     /**
-     * Cancels the search and deletes it from the database.
+     * Deletes the latest search results from the database. Only used when the client cancels the search explicitly.
      * @param {string} searchId The ID of the search.
-     * @throws NotFoundException if a MongoDB document with the given ID was not found.
+     * @throws {NotFoundException} NotFoundException if a MongoDB document with the given ID was not found.
+     * @throws {InternalServerErrorException} InternalServerErrorException if an error occurred while deleting the document from the database.
      */
     @Delete('cancel')
     @HttpCode(HttpStatus.NO_CONTENT)
     @ApiOperation({
-        summary:
-            'Cancels the Smart Agent search and deletes the latest search results from the database.',
+        summary: 'Deletes the latest search results from the database when the client cancels the search explicitly.',
     })
     @ApiQuery({
         name: 'searchId',
@@ -209,8 +316,118 @@ export class RealEstateController {
     })
     @ApiNotFoundResponse({
         description: 'A MongoDB document with the given ID was not found.',
+        schema: {
+            type: 'object',
+            properties: {
+                statusCode: {
+                    type: 'number',
+                    example: 404,
+                },
+                message: {
+                    type: 'string',
+                    example: 'Not Found',
+                },
+                error: {
+                    type: 'string',
+                    example: 'Not Found',
+                },
+            },
+        }
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'An error occurred while trying to delete the document in the database.',
+        schema: {
+            type: 'object',
+            properties: {
+                statusCode: {
+                    type: 'number',
+                    example: 500,
+                },
+                message: {
+                    type: 'string',
+                    example: 'Internal Server Error',
+                },
+                error: {
+                    type: 'string',
+                    example: 'Internal Server Error',
+                },
+            },
+        }
     })
     async cancelSearch(@Query('searchId') searchId: string): Promise<void> {
         await this.realEstateDbService.deleteDocumentById(searchId);
+    }
+
+    /**
+     * Deletes the latest search results from the database. Only used for sendBeacon requests (during client page unload)
+     * @param {string} searchId The ID of the search.
+     * @throws {NotFoundException} NotFoundException if a MongoDB document with the given ID was not found.
+     * @throws {InternalServerErrorException} InternalServerErrorException if an error occurred while deleting the document from the database.
+     */
+    @Post('cancel-upon-send-beacon')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    @ApiOperation({
+        summary: 'Deletes the latest search results from the database upon client page unload.',
+    })
+    @ApiBody({
+        description: 'The search ID to delete.',
+        schema: {
+            type: 'object',
+            properties: {
+                searchId: {
+                    type: 'string',
+                    example: '5f7a8c7b3d9d5c3e2c3e2c3e',
+                },
+            },
+        },
+    })
+    @ApiNoContentResponse({
+        description: 'The document was deleted from the database successfully.',
+    })
+    @ApiNotFoundResponse({
+        description: 'A MongoDB document with the given ID was not found.',
+        schema: {
+            type: 'object',
+            properties: {
+                statusCode: {
+                    type: 'number',
+                    example: 404,
+                },
+                message: {
+                    type: 'string',
+                    example: 'Not Found',
+                },
+                error: {
+                    type: 'string',
+                    example: 'Not Found',
+                },
+            },
+        }
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'An error occurred while trying to delete the document in the database.',
+        schema: {
+            type: 'object',
+            properties: {
+                statusCode: {
+                    type: 'number',
+                    example: 500,
+                },
+                message: {
+                    type: 'string',
+                    example: 'Internal Server Error',
+                },
+                error: {
+                    type: 'string',
+                    example: 'Internal Server Error',
+                },
+            },
+        }
+    })
+    async cancelSearchUponSendBeacon(@Req() req: RawBodyRequest<Request>): Promise<void> {
+        const raw = await rawbody(req);
+        const text = raw.toString().trim();
+        const json = JSON.parse(text);
+        await this.realEstateDbService.deleteDocumentById(json.searchId);
     }
 }

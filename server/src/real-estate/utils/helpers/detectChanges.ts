@@ -1,4 +1,4 @@
-import { RealEstate } from '../../dtos/real-estate.dto';
+import { RealEstate } from '../dtos/real-estate.dto';
 
 /**
  * Detects changes between oldData and newData arrays of RealEstate object and returns an

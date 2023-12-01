@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { RealEstate } from '../dtos/real-estate.dto';
-import { SearchParams } from '../dtos/search-params.dto';
+import { RealEstate } from '../utils/dtos/real-estate.dto';
+import { SearchParams } from '../utils/dtos/search-params.dto';
 
 /**
  * Represents a MongoDB document for real estate search results data.

@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 
 import { createMock, DeepMocked } from '@golevelup/ts-jest';
 
-import { RealEstate } from "../dtos/real-estate.dto";
+import { RealEstate } from "../utils/dtos/real-estate.dto";
 import { RealEstateDocumentModel } from "../models/real-estate-document.model";
 
 import {
@@ -16,7 +16,7 @@ import {
     Yad2RealEstateResponse,
     Yad2CityCodeResponse,
     Yad2RealEstateRequestParams,
-} from '../services/types';
+} from '../utils/types';
 
 // import {
 //     yad2RealEstateRequestURL,
@@ -25,7 +25,7 @@ import {
 //     sortRealEstateItemsByDate
 // } from "../services/helpers";
 
-import * as helpers from '../services/helpers';
+import * as helpers from '../utils/helpers';
 
 
 describe('RealEstateApiService', () => {

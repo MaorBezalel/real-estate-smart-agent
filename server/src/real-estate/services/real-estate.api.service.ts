@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, ServiceUnavailableException } from "@nes
 import { HttpService } from "@nestjs/axios";
 import { map, catchError, lastValueFrom } from "rxjs";
 
-import { RealEstate } from "../dtos/real-estate.dto";
+import { RealEstate } from "../utils/dtos/real-estate.dto";
 import { RealEstateDocumentModel } from "../models/real-estate-document.model";
 
 import {
@@ -12,16 +12,17 @@ import {
     Yad2RealEstateResponse,
     Yad2CityCodeResponse,
     Yad2RealEstateRequestParams,
-} from "./types";
+} from "../utils/types";
 
 import {
     yad2RealEstateRequestURL,
     extractOnlyRealEstateData,
     detectChanges,
-    sortRealEstateItemsByDate
-} from "./helpers";
+    sortRealEstateItemsByDate,
+    removeDuplicates
+} from "../utils/helpers";
 
-import { YAD2_REQUEST_HEADERS } from "./constants/request-headers.constants";
+import { YAD2_REQUEST_HEADERS } from "../utils/constants/request-headers.constants";
 
 /**
  * Service for fetching real estate data from Yad2 API.
@@ -54,10 +55,10 @@ export class RealEstateApiService {
 
         const yad2Data: Yad2RealEstateResponse = await this.fetchYad2RealEstateData(url);
         const realEstateData: RealEstate[] = extractOnlyRealEstateData(yad2Data);
-        const sortedRealEstateData: RealEstate[] = sortRealEstateItemsByDate(realEstateData);
+        const uniqueRealEstateData: RealEstate[] = removeDuplicates(realEstateData);
 
         return {
-            feed_items: sortedRealEstateData,
+            feed_items: uniqueRealEstateData,
             search_params: {
                 ...requestParams,
                 cityCode: yad2RequestSearchParams.cityCode
@@ -82,11 +83,11 @@ export class RealEstateApiService {
 
         const yad2Data = await this.fetchYad2RealEstateData(url);
         const realEstateData: RealEstate[] = extractOnlyRealEstateData(yad2Data);
-        const changedRealEstateData: RealEstate[] = detectChanges(previousData.items, realEstateData);
-        const sortedRealEstateData: RealEstate[] = sortRealEstateItemsByDate(changedRealEstateData);
+        const uniqueRealEstateData: RealEstate[] = removeDuplicates(realEstateData);
+        const changedRealEstateData: RealEstate[] = detectChanges(previousData.items, uniqueRealEstateData);
 
         return {
-            feed_items: sortedRealEstateData,
+            feed_items: changedRealEstateData,
             search_params: previousData.search_params,
             total_pages: yad2Data.data.feed.total_pages
         }

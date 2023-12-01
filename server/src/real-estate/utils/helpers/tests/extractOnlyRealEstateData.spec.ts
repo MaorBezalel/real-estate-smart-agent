@@ -1,6 +1,6 @@
-import { extractOnlyRealEstateData } from "../helpers";
+import { extractOnlyRealEstateData } from "..";
 import { RealEstate } from "../../dtos/real-estate.dto";
-import { Yad2RealEstateResponse, Yad2RealEstateItem } from "../types";
+import { Yad2RealEstateResponse, Yad2RealEstateItem } from "../../types";
 
 describe("extractOnlyRealEstateData", () => {
     it("should filter out non-real estate items and items sold by real estate agents", () => {
