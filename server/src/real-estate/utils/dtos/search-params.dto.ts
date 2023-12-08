@@ -11,21 +11,21 @@ export class SearchParams {
     })
     dealType: 'forsale' | 'rent';
 
-    /** The city to search for real estate properties in. */
+    /** The settlement to search for real estate properties in. */
     @ApiProperty({
         type: String,
-        description: 'The city to search for real estate properties in.',
+        description: 'The settlement to search for real estate properties in.',
         example: 'חולון',
     })
-    city: string;
+    settlement: string;
 
-    /** The city code to search for real estate properties in. */
+    /** The settlement code to search for real estate properties in. */
     @ApiProperty({
         type: String,
-        description: 'The city code to search for real estate properties in.',
+        description: 'The settlement code to search for real estate properties in.',
         example: '6600',
     })
-    cityCode: string;
+    settlementCode: string;
 
     /** The minimum price of real estate properties to search for. */
     @ApiProperty({

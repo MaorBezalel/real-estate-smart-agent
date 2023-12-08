@@ -39,7 +39,7 @@ const fakeYad2Data1 = (): Yad2RealEstateResponse => {
                         title_2: "Apartment",
                         title_1: "123 Main St",
                         neighborhood: "Example Neighborhood",
-                        city: "Example City",
+                        settlement: "Example City",
                         row_4: [
                             { value: "2" },
                             { value: 1 },
@@ -54,7 +54,7 @@ const fakeYad2Data1 = (): Yad2RealEstateResponse => {
                         title_2: "House",
                         title_1: "456 Elm St",
                         neighborhood: "Example Neighborhood",
-                        city: "Example City",
+                        settlement: "Example City",
                         row_4: [
                             { value: "3" },
                             { value: 2 },
@@ -83,7 +83,7 @@ const expectedRealEstateData1 = (): RealEstate[] => {
             estateType: fakeYad2DataItem.title_2,
             street: fakeYad2DataItem.title_1,
             neighborhood: fakeYad2DataItem.neighborhood,
-            city: fakeYad2DataItem.city,
+            settlement: fakeYad2DataItem.settlement,
             rooms: fakeYad2DataItem.row_4[0].value,
             floor: fakeYad2DataItem.row_4[1].value as number | 'קרקע',
             squareMeters: fakeYad2DataItem.row_4[2].value,
@@ -103,7 +103,7 @@ const fakeYad2Data2 = (): Yad2RealEstateResponse => {
                         title_2: "Apartment",
                         title_1: "789 Main St",
                         neighborhood: "Example Neighborhood",
-                        city: "Example City",
+                        settlement: "Example City",
                         row_4: [
                             { value: "2" },
                             { value: 1 },
@@ -118,7 +118,7 @@ const fakeYad2Data2 = (): Yad2RealEstateResponse => {
                         title_2: "House",
                         title_1: "012 Elm St",
                         neighborhood: "Example Neighborhood",
-                        city: "Example City",
+                        settlement: "Example City",
                         row_4: [
                             { value: "3" },
                             { value: 2 },

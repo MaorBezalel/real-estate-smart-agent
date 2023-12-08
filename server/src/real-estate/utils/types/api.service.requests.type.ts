@@ -5,8 +5,8 @@ export type ApiServiceInitialRequestParams = {
     /** The type of real estate request, either 'forsale' or 'rent'. */
     dealType: 'forsale' | 'rent';
 
-    /** The city to search for real estate properties in. */
-    city: string;
+    /** The settlement to search for real estate properties in. */
+    settlement: string;
 
     /** The minimum price of real estate properties to search for. */
     minPrice: number;
@@ -25,8 +25,8 @@ export type ApiServiceUpdatedRequestParams = {
     /** The type of real estate request, either 'forsale' or 'rent'. */
     dealType: 'forsale' | 'rent';
 
-    /** The city code to search for real estate properties in. */
-    cityCode: string;
+    /** The settlement code to search for real estate properties in. */
+    settlementCode: string;
 
     /** The minimum price of real estate properties to search for. */
     minPrice: number;

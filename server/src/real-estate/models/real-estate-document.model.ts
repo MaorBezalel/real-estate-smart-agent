@@ -19,6 +19,12 @@ export class RealEstateDocumentModel {
     @Prop({ required: true, type: Number })
     total_pages: number;
 
+    /** 
+     * The timestamp of when the document was last updated. 
+     * @remarks it is a string for formatting purposes.
+    */
+    @Prop({ required: true, type: String })
+    last_updated: string
 }
 
 /** Represents a MongoDB schema for real estate search results data. */

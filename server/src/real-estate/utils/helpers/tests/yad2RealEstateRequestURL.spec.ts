@@ -38,18 +38,18 @@ const fakeBaseURL = (): string => 'https://example.com';
 
 const fakeSearchParams1 = (): Yad2RealEstateRequestParams => ({
     dealType: 'rent',
-    cityCode: '5000',
+    settlementCode: '5000',
     minPrice: 1000,
     maxPrice: 2000,
     page: 10
 });
-const expectedURL1 = (): string => 'https://example.com/rent?city=5000&propertyGroup=apartments,houses&price=1000-2000&page=10&forceLdLoad=true';
+const expectedURL1 = (): string => 'https://example.com/rent?settlement=5000&propertyGroup=apartments,houses&price=1000-2000&page=10&forceLdLoad=true';
 
 const fakeSearchParams2 = (): Yad2RealEstateRequestParams => ({
     dealType: 'rent',
-    cityCode: '5000',
+    settlementCode: '5000',
     minPrice: 1000,
     maxPrice: 2000,
     page: -1
 });
-const expectedURL2 = (): string => 'https://example.com/rent?city=5000&propertyGroup=apartments,houses&price=1000-2000&page=1&forceLdLoad=true';
+const expectedURL2 = (): string => 'https://example.com/rent?settlement=5000&propertyGroup=apartments,houses&price=1000-2000&page=1&forceLdLoad=true';

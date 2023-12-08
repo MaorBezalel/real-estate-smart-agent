@@ -22,7 +22,7 @@ export const extractOnlyRealEstateData = (yad2Data: Yad2RealEstateResponse): Rea
             estateType: item.title_2,
             street: item.title_1,
             neighborhood: item.neighborhood,
-            city: item.city,
+            settlement: item.settlement,
             rooms: item.row_4[0].value,
             floor: item.row_4[1].value as number | 'קרקע',
             squareMeters: item.row_4[2].value,

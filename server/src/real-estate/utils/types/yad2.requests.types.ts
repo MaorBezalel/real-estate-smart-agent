@@ -2,8 +2,8 @@ export type Yad2RealEstateRequestParams = {
     /** The type of real estate request, either 'forsale' or 'rent'. */
     dealType: 'forsale' | 'rent';
 
-    /** The city code to search for real estate properties in. */
-    cityCode: string;
+    /** The settlement code to search for real estate properties in. */
+    settlementCode: string;
 
     /** The minimum price of real estate properties to search for. */
     minPrice: number;

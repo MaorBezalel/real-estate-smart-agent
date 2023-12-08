@@ -39,17 +39,17 @@ export class RealEstateApiService {
      * Fetches the initial real estate data based on the provided request parameters.
      * @param {ApiServiceInitialRequestParams} requestParams The request parameters for fetching the data.
      * @returns {Promise<ApiServiceResponse>} A promise that resolves to the fetched data.
-     * @throws NotFoundException if the city is not found.
+     * @throws NotFoundException if the settlement is not found.
      * @throws NotFoundException if the page is not found.
      * @throws ServiceUnavailableException if the Yad2 API is not available.
     */
     async fetchInitialRealEstateData(
         requestParams: ApiServiceInitialRequestParams
     ): Promise<ApiServiceResponse> {
-        const { city, ...commonSearchParams } = requestParams;
+        const { settlement, ...commonSearchParams } = requestParams;
         const yad2RequestSearchParams: Yad2RealEstateRequestParams = {
             ...commonSearchParams,
-            cityCode: await this.fetchCityCodeFromYad2(requestParams.city)
+            settlementCode: await this.fetchCityCodeFromYad2(requestParams.settlement)
         };
         const url = yad2RealEstateRequestURL(process.env.YAD2_REAL_ESTATE_REQUEST_URL, yad2RequestSearchParams);
 
@@ -61,7 +61,7 @@ export class RealEstateApiService {
             feed_items: uniqueRealEstateData,
             search_params: {
                 ...requestParams,
-                cityCode: yad2RequestSearchParams.cityCode
+                settlementCode: yad2RequestSearchParams.settlementCode
             },
             total_pages: yad2Data.data.feed.total_pages
         }
@@ -121,21 +121,21 @@ export class RealEstateApiService {
     }
 
     /**
-     * Fetches the city code from Yad2 API.
-     * @param city The city to fetch the code for.
-     * @returns The city code.
-     * @throws NotFoundException if the city is not found.
+     * Fetches the settlement code from Yad2 API.
+     * @param settlement The settlement to fetch the code for.
+     * @returns The settlement code.
+     * @throws NotFoundException if the settlement is not found.
      * @throws ServiceUnavailableException if the Yad2 API is not available.
     */
-    async fetchCityCodeFromYad2(city: string): Promise<string> {
+    async fetchCityCodeFromYad2(settlement: string): Promise<string> {
         return await lastValueFrom(this.httpService.get<Yad2CityCodeResponse[]>(
-            `${process.env.YAD2_CITY_CODE_REQUEST_URL}?text=${encodeURIComponent(city)}`, {
+            `${process.env.YAD2_SETTLEMENT_CODE_REQUEST_URL}?text=${encodeURIComponent(settlement)}`, {
             headers: YAD2_REQUEST_HEADERS
         })
             .pipe(
                 map(res => {
-                    if (!res.data?.length) throw new NotFoundException(`City ${city} not found`);
-                    return res.data[0].value.city;
+                    if (!res.data?.length) throw new NotFoundException(`City ${settlement} not found`);
+                    return res.data[0].value.settlement;
                 })
             )
             .pipe(

@@ -35,6 +35,8 @@ import {
     ApiServiceResponse,
 } from '../utils/types';
 
+import { getTodayDateTime } from '../utils/helpers';
+
 import {
     GetInitialSearchResultsResponse,
     GetUpdatedSearchResultsResponse,
@@ -59,10 +61,10 @@ export class RealEstateController {
     /**
      * Fetches the initial search results from Yad2 API and saves them in the database.
      * @param {'forsale' | 'rent'} dealType The deal type of the real estate (forsale or rent).
-     * @param {string} city The name of the city of the real estate.
+     * @param {string} settlement The name of the settlement of the real estate.
      * @param {number} minPrice The minimum price of the real estate.
      * @param {number} maxPrice The maximum price of the real estate.
-     * @throws {NotFoundException} NotFoundException if the data for the requested city was not found.
+     * @throws {NotFoundException} NotFoundException if the data for the requested settlement was not found.
      * @throws {NotFoundException} NotFoundException if the page is not found.
      * @throws {ServiceUnavailableException} ServiceUnavailableException if the Yad2 API is not available.
      * @throws {InternalServerErrorException} InternalServerErrorException if an error occurred while inserting the document to the database.
@@ -81,8 +83,8 @@ export class RealEstateController {
         required: true,
     })
     @ApiQuery({
-        name: 'city',
-        description: 'The city of the real estate.',
+        name: 'settlement',
+        description: 'The settlement of the real estate.',
         required: true,
     })
     @ApiQuery({
@@ -105,7 +107,7 @@ export class RealEstateController {
         type: GetInitialSearchResultsResponse,
     })
     @ApiNotFoundResponse({
-        description: 'The data for the requested city or page was not found.',
+        description: 'The data for the requested settlement or page was not found.',
         schema: {
             type: 'object',
             properties: {
@@ -166,14 +168,14 @@ export class RealEstateController {
     })
     async getInitialSearchResults(
         @Query('dealType') dealType: 'forsale' | 'rent',
-        @Query('city') city: string,
+        @Query('settlement') settlement: string,
         @Query('minPrice') minPrice: number,
         @Query('maxPrice') maxPrice: number,
         @Query('page') page?: number,
     ): Promise<GetInitialSearchResultsResponse> {
         const requestParams: ApiServiceInitialRequestParams = {
             dealType,
-            city,
+            settlement,
             minPrice,
             maxPrice,
             page: page || 1,
@@ -183,6 +185,7 @@ export class RealEstateController {
             items: response.feed_items,
             search_params: response.search_params,
             total_pages: response.total_pages,
+            last_updated: getTodayDateTime(),
         });
         const searchId: string = document._id.toString();
 
@@ -286,6 +289,7 @@ export class RealEstateController {
             items: response.feed_items,
             search_params: response.search_params,
             total_pages: response.total_pages,
+            last_updated: getTodayDateTime(),
         });
 
         return {

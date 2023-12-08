@@ -37,7 +37,7 @@ describe('RealEstateModule (e2e)', () => {
             const response = await request(app.getHttpServer())
                 .get('/real-estate/search/forsale')
                 .query({
-                    city: 'חולון',
+                    settlement: 'חולון',
                     minPrice: 1_000_000,
                     maxPrice: 2_000_000,
                 })
@@ -50,12 +50,12 @@ describe('RealEstateModule (e2e)', () => {
             searchId = response.body.search_id;
         });
 
-        it('should throw `NotFoundException` for non-existent city', async () => {
-            const nonExistentCity = 'NON_EXISTENT_CITY';
+        it('should throw `NotFoundException` for non-existent settlement', async () => {
+            const nonExistentCity = 'NON_EXISTENT_SETTLEMENT';
             const response = await request(app.getHttpServer())
                 .get('/real-estate/search/forsale')
                 .query({
-                    city: nonExistentCity,
+                    settlement: nonExistentCity,
                     minPrice: 1_000_000,
                     maxPrice: 2_000_000,
                 })
