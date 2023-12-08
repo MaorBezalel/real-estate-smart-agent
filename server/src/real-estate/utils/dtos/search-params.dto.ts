@@ -25,7 +25,7 @@ export class SearchParams {
         description: 'The settlement code to search for real estate properties in.',
         example: '6600',
     })
-    settlementCode: string;
+    cityCode: string;
 
     /** The minimum price of real estate properties to search for. */
     @ApiProperty({

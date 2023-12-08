@@ -126,7 +126,7 @@ export class GetUpdatedSearchResultsResponse {
         example: {
             dealType: 'forsale',
             settlement: 'רמת גן',
-            settlementCode: '5000',
+            cityCode: '5000',
             minPrice: 0,
             maxPrice: 1_000_000,
             page: 1

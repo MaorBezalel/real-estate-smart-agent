@@ -22,12 +22,12 @@ export const extractOnlyRealEstateData = (yad2Data: Yad2RealEstateResponse): Rea
             estateType: item.title_2,
             street: item.title_1,
             neighborhood: item.neighborhood,
-            settlement: item.settlement,
+            settlement: item.city,
             rooms: item.row_4[0].value,
             floor: item.row_4[1].value as number | 'קרקע',
             squareMeters: item.row_4[2].value,
             price: item.price,
-            updatedAt: item.date
+            updatedAt: item.date,
         })
 
         return acc;

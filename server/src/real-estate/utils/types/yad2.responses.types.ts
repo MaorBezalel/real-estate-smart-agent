@@ -29,8 +29,8 @@ export type Yad2RealEstateResponse = {
 export type Yad2CityCodeResponse = {
     /** The data returned by the API which contain various codes */
     value: {
-        /** The settlement code of the settlement. */
-        settlement: string;
+        /** The city code of the city. */
+        city: string;
 
         /** Additional codes that may be present in this data object. */
         [key: string]: unknown;

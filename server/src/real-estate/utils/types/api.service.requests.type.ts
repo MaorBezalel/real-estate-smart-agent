@@ -26,7 +26,7 @@ export type ApiServiceUpdatedRequestParams = {
     dealType: 'forsale' | 'rent';
 
     /** The settlement code to search for real estate properties in. */
-    settlementCode: string;
+    cityCode: string;
 
     /** The minimum price of real estate properties to search for. */
     minPrice: number;

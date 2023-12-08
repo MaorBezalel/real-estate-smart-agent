@@ -180,6 +180,7 @@ export class RealEstateController {
             maxPrice,
             page: page || 1,
         };
+        console.log(requestParams);
         const response: ApiServiceResponse = await this.realEstateApiService.fetchInitialRealEstateData(requestParams);
         const document = await this.realEstateDbService.insertNewDocument({
             items: response.feed_items,

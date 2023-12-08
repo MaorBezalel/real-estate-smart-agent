@@ -18,7 +18,6 @@ import {
     yad2RealEstateRequestURL,
     extractOnlyRealEstateData,
     detectChanges,
-    sortRealEstateItemsByDate,
     removeDuplicates
 } from "../utils/helpers";
 
@@ -49,7 +48,7 @@ export class RealEstateApiService {
         const { settlement, ...commonSearchParams } = requestParams;
         const yad2RequestSearchParams: Yad2RealEstateRequestParams = {
             ...commonSearchParams,
-            settlementCode: await this.fetchCityCodeFromYad2(requestParams.settlement)
+            cityCode: await this.fetchcityCodeFromYad2(requestParams.settlement)
         };
         const url = yad2RealEstateRequestURL(process.env.YAD2_REAL_ESTATE_REQUEST_URL, yad2RequestSearchParams);
 
@@ -61,7 +60,7 @@ export class RealEstateApiService {
             feed_items: uniqueRealEstateData,
             search_params: {
                 ...requestParams,
-                settlementCode: yad2RequestSearchParams.settlementCode
+                cityCode: yad2RequestSearchParams.cityCode
             },
             total_pages: yad2Data.data.feed.total_pages
         }
@@ -127,15 +126,15 @@ export class RealEstateApiService {
      * @throws NotFoundException if the settlement is not found.
      * @throws ServiceUnavailableException if the Yad2 API is not available.
     */
-    async fetchCityCodeFromYad2(settlement: string): Promise<string> {
+    async fetchcityCodeFromYad2(settlement: string): Promise<string> {
         return await lastValueFrom(this.httpService.get<Yad2CityCodeResponse[]>(
             `${process.env.YAD2_SETTLEMENT_CODE_REQUEST_URL}?text=${encodeURIComponent(settlement)}`, {
             headers: YAD2_REQUEST_HEADERS
         })
             .pipe(
                 map(res => {
-                    if (!res.data?.length) throw new NotFoundException(`City ${settlement} not found`);
-                    return res.data[0].value.settlement;
+                    if (!res.data?.length) throw new NotFoundException(`Settlement ${settlement} not found`);
+                    return res.data[0].value.city;
                 })
             )
             .pipe(

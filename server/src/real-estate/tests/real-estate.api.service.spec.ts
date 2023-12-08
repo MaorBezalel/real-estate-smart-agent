@@ -18,13 +18,6 @@ import {
     Yad2RealEstateRequestParams,
 } from '../utils/types';
 
-// import {
-//     yad2RealEstateRequestURL,
-//     extractOnlyRealEstateData,
-//     detectChanges,
-//     sortRealEstateItemsByDate
-// } from "../services/helpers";
-
 import * as helpers from '../utils/helpers';
 
 
