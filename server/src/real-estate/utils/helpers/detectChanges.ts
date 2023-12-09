@@ -1,5 +1,5 @@
 import { RealEstate } from '../dtos/real-estate.dto';
-import { isEqual } from 'lodash';
+import { isEqual, isEqualWith } from 'lodash';
 
 /**
  * Detects changes between oldData and newData arrays of RealEstate object and returns an
@@ -16,7 +16,13 @@ export const detectChanges = (oldData: RealEstate[], newData: RealEstate[]): Rea
         if (isNew) return { ...newItem, status: 'new' };
 
         const oldItem = oldDataMap.get(newItem.linkToken);
-        const isUpdated = !isEqual(oldItem, newItem);
+        const unchangeableProperties: (keyof RealEstate)[] = ['linkToken', 'status', 'estateType', 'settlement', 'neighborhood', 'street'];
+
+        const isUpdated = !isEqualWith(oldItem, newItem, (oldValue, newValue, key) => {
+            if (unchangeableProperties.includes(key as keyof RealEstate)) return true;
+            if (key === undefined) return true; // sometimes neighborhood is undefined in the old data
+            return isEqual(oldValue, newValue);
+        });
         if (isUpdated) return { ...newItem, status: 'updated' };
 
         return { ...newItem, status: 'default' };
