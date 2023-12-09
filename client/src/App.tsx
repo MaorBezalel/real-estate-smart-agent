@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './layouts/Header';
 
@@ -13,10 +13,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="about" element={<AboutPage />} />
-                <Route path="search">
-                    <Route index element={<SearchPage />} />
-                    <Route path=":id" element={<SearchPage />} />
-                </Route>
+                <Route path="search" element={<SearchPage />} />
             </Routes>
         </Router>
     );

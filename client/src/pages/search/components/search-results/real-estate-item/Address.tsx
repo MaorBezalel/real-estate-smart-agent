@@ -1,16 +1,16 @@
 type AddressProps = {
     street: string;
-    neighborhood: string;
-    city: string;
+    neighborhood: string | undefined;
+    settlement: string;
 };
 
 export default function Address({
     street,
     neighborhood,
-    city,
+    settlement,
 }: AddressProps): React.JSX.Element {
     return (
-        <div
+        <address
             className="flex flex-col
             tablet-lg:order-1 tablet-lg:justify-between tablet-lg:gap-2"
         >
@@ -34,11 +34,11 @@ export default function Address({
                 tablet-lg:text-base
                 laptop-sm:text-lg
                 laptop-md:text-xl"
-                aria-label="שכונה ועיר הנכס"
-                value={[neighborhood, city]}
+                aria-label={!!neighborhood ? 'שכונה ועיר הנכס' : 'עיר הנכס'}
+                value={!!neighborhood ? [neighborhood, settlement] : settlement}
             >
-                {`${neighborhood}, ${city}`}
+                {!!neighborhood ? `${neighborhood}, ${settlement}` : settlement}
             </data>
-        </div>
+        </address>
     );
 }

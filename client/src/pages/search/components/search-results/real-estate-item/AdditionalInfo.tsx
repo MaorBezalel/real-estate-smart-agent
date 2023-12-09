@@ -22,6 +22,7 @@ export default function AdditionalInfo({
         >
             {labels.map((label, index) => (
                 <div
+                    key={index}
                     className="flex flex-col items-center justify-between
                     tablet-lg:gap-2"
                 >

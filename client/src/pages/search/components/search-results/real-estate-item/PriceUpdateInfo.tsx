@@ -1,18 +1,18 @@
-import { unformatPrice, shortenDate } from '../../utils/helpers';
+import { unformatPrice, formatDate } from '../../../utils/helpers';
 
-type MainInfoProps = {
-    price: string; // comes with a shekel sign
+type PriceAndDateProps = {
+    price: string;
     lastUpdated: Date;
 };
 
-export default function MainInfo({
+export default function PriceUpdateInfo({
     price,
     lastUpdated,
-}: MainInfoProps): React.JSX.Element {
+}: PriceAndDateProps): React.JSX.Element {
     return (
         <div
             className="flex items-center justify-between
-            tablet-lg:order-3 tablet-lg:flex-col tablet-lg:gap-2"
+            tablet-lg:order-3 tablet-lg:flex-col tablet-lg:items-end tablet-lg:gap-2"
         >
             <data
                 className="text-xl font-bold text-primary
@@ -31,8 +31,21 @@ export default function MainInfo({
                 {price}
             </data>
             <time
-                className="text-lg font-medium text-secondary
-                mobile-lg:text-xl
+                className="flex flex-col text-base font-medium text-secondary
+                mobile-lg:hidden"
+                style={{
+                    textShadow:
+                        '1px 1px 0 #001f24, -1px -1px 1px #001f24, 1px -1px 1px #001f24, -1px 1px 1px #001f24, 1px 1px 1px #001f24',
+                }}
+                aria-label="תאריך עדכון אחרון"
+                dateTime={lastUpdated.toISOString()}
+            >
+                <span>{formatDate(lastUpdated).split(' ')[0]}</span>
+                <span>{formatDate(lastUpdated).split(' ')[1]}</span>
+            </time>
+            <time
+                className="hidden
+                mobile-lg:flex mobile-lg:flex-col mobile-lg:text-base mobile-lg:font-medium mobile-lg:text-secondary
                 tablet-sm:text-2xl
                 tablet-lg:text-xl
                 laptop-md:text-2xl"
@@ -43,7 +56,7 @@ export default function MainInfo({
                 aria-label="תאריך עדכון אחרון"
                 dateTime={lastUpdated.toISOString()}
             >
-                {shortenDate(lastUpdated)}
+                {formatDate(lastUpdated)}
             </time>
         </div>
     );

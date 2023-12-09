@@ -1,78 +1,42 @@
+import { useState, useEffect } from 'react';
+import { SearchPageContext } from './SearchPageContext';
+
 import Heading from './components/Heading';
+import SearchForm from './components/search-form/SearchForm';
+import Separator from './components/Separator';
+import SearchResults from './components/search-results/SearchResults';
 
-import Dropbox from './components/input/Dropbox';
-import InputField from './components/input/InputField';
-import SumbitButton from './components/input/SumbitButton';
-
-import RealEstateItem from './components/output/RealEstateItem';
-
-import { useForm } from 'react-hook-form';
+import './assets/animations/loading.css';
 
 export default function SearchPage(): React.JSX.Element {
-    //const { register, handleSubmit } = useForm();
+    const [isSubmitSuccessful, setIsSubmitSuccessful] =
+        useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     return (
-        <main
-            className="container mx-auto flex flex-1 flex-col place-items-center gap-4 px-4 pt-4 
-            mobile-md:gap-6
-            tablet-sm:gap-7
-            laptop-md:gap-10"
+        <SearchPageContext.Provider
+            value={{
+                isSubmitSuccessful,
+                setIsSubmitSuccessful,
+                isLoading,
+                setIsLoading,
+            }}
         >
-            <Heading />
-            <form
-                className="flex w-full flex-col justify-center gap-3
-                tablet-sm:grid tablet-sm:grid-cols-2
-                tablet-sm:gap-4
-                tablet-lg:flex tablet-lg:flex-row tablet-lg:items-center tablet-lg:justify-center tablet-lg:gap-4
-                laptop-md:gap-5"
-                id="search-form"
+            <main
+                className="container mx-auto flex flex-1 flex-col place-items-center gap-4 px-4 pt-4
+                mobile-md:gap-6
+                tablet-sm:gap-7
+                laptop-md:gap-10"
             >
-                <Dropbox />
-                <InputField
-                    state="city-search"
-                    id="city"
-                    placeholder="עיר..."
-                    type="text"
-                    inputMode="search"
-                />
-                <InputField
-                    state="min-price"
-                    id="city"
-                    placeholder="עיר..."
-                    type="text"
-                    inputMode="numeric"
-                    min={0}
-                />
-                <InputField
-                    state="max-price"
-                    id="city"
-                    placeholder="עיר..."
-                    type="text"
-                    inputMode="numeric"
-                    max={1_000_000_000}
-                />
-                <SumbitButton />
-            </form>
-
-            <output
-                className="flex h-full w-full flex-col"
-                htmlFor="search-form"
-            >
-                <ul className="flex h-full w-full flex-col gap-4">
-                    <RealEstateItem
-                        linkToken="24j6yk8q"
-                        price="1,500,000 ₪"
-                        lastUpdated={new Date('2021-08-01 12:00:00')}
-                        estateType="דירה"
-                        rooms={2}
-                        floor={3}
-                        area={80}
-                        street="מבצע סיני 29"
-                        neighborhood="רמת יוסף"
-                        city="בת ים"
-                    />
-                </ul>
-            </output>
-        </main>
+                <Heading />
+                <SearchForm id="real-estate-search-form" />
+                {isSubmitSuccessful && (
+                    <>
+                        <Separator />
+                        <SearchResults id="real-estate-output" />
+                    </>
+                )}
+            </main>
+        </SearchPageContext.Provider>
     );
 }

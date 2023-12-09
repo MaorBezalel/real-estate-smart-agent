@@ -6,7 +6,6 @@ import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/real-estate-smart-agent',
   plugins: [react()],
   test: {
     includeSource: ["src/**/*.{ts,tsx}"],
@@ -17,7 +16,6 @@ export default defineConfig({
     server: {
       deps: {
         inline: ['vitest-canvas-mock'],
-
       }
     }
   }

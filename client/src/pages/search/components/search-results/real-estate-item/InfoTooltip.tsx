@@ -1,18 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
-type ExternalLinkProps = {
-    linkToken: string;
-};
-
-export default function ExternalLink({
-    linkToken,
-}: ExternalLinkProps): React.JSX.Element {
+export default function InfoTooltip(): React.JSX.Element {
     return (
-        <a
-            href={`https://www.yad2.co.il/${linkToken}`}
-            target="_blank"
-            rel="noreferrer"
+        <div
             className="absolute left-2 top-2 hidden gap-2 transition duration-200 ease-in-out
             hover:scale-105 hover:brightness-110
             tablet-lg:flex tablet-lg:items-center"
@@ -28,6 +19,6 @@ export default function ExternalLink({
                 icon={faArrowUpRightFromSquare}
                 className="text-accent"
             />
-        </a>
+        </div>
     );
 }
