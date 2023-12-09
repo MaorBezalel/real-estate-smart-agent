@@ -21,7 +21,7 @@ describe("detectChanges", () => {
     });
 
     it(`should return the array with a item that have 'status' property set to 'updated'
-        when that item is in both oldData and newData arrays with different 'updatedAt' property`, () => {
+        when that item is in both oldData and newData arrays with any different properties values (except for the linkToken property value)`, () => {
         // Setup
         const [oldData, newData] = fakeOldAndNewData2();
 
@@ -153,8 +153,8 @@ const fakeOldAndNewData2 = (): [RealEstate[], RealEstate[]] => {
             street: 'הרצל 1',
             neighborhood: 'רמת יוסף',
             settlement: 'רמת גן',
-            rooms: 3,
-            floor: 2,
+            rooms: 2,
+            floor: 3,
             squareMeters: 80,
             price: '1,100,000 ₪',
             updatedAt: '2021-08-01 16:10:00'
@@ -171,8 +171,8 @@ const expectedNewDataToBeUpdated = (): RealEstate[] => [
         street: 'הרצל 1',
         neighborhood: 'רמת יוסף',
         settlement: 'רמת גן',
-        rooms: 3,
-        floor: 2,
+        rooms: 2,
+        floor: 3,
         squareMeters: 80,
         price: '1,100,000 ₪',
         updatedAt: '2021-08-01 16:10:00'

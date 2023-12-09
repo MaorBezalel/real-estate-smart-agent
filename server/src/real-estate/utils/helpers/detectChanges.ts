@@ -1,4 +1,5 @@
 import { RealEstate } from '../dtos/real-estate.dto';
+import { isEqual } from 'lodash';
 
 /**
  * Detects changes between oldData and newData arrays of RealEstate object and returns an
@@ -10,14 +11,14 @@ import { RealEstate } from '../dtos/real-estate.dto';
 export const detectChanges = (oldData: RealEstate[], newData: RealEstate[]): RealEstate[] => {
     const oldDataMap = new Map<typeof RealEstate.prototype.linkToken, RealEstate>(oldData.map(item => [item.linkToken, item]));
 
-    return newData.map(item => {
-        const isNew = !oldDataMap.has(item.linkToken);
-        if (isNew) return { ...item, status: 'new' };
+    return newData.map(newItem => {
+        const isNew = !oldDataMap.has(newItem.linkToken);
+        if (isNew) return { ...newItem, status: 'new' };
 
-        const oldItem = oldDataMap.get(item.linkToken);
-        const isUpdated = oldItem.updatedAt !== item.updatedAt;
-        if (isUpdated) return { ...item, status: 'updated' };
+        const oldItem = oldDataMap.get(newItem.linkToken);
+        const isUpdated = !isEqual(oldItem, newItem);
+        if (isUpdated) return { ...newItem, status: 'updated' };
 
-        return { ...item, status: 'default' };
+        return { ...newItem, status: 'default' };
     });
 }
