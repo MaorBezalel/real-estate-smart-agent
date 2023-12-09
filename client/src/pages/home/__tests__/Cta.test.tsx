@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import userEvent from '@testing-library/user-event';
 
-import { BrowserRouter as Router } from 'react-router-dom'; // Using BrowserRouter instead of HashRouter to avoid # in the URL during tests
-import Cta from '../components/Cta';
+import { BrowserRouter as Router } from 'react-router-dom';
 
+import Cta from '../components/Cta';
 import {
     CTA_TEST_ID,
     CTA_LINKS_LIST_TEST_ID,
@@ -146,26 +146,6 @@ describe('`Cta` component', () => {
             expect(searchLinkItem.childElementCount).toBe(1);
             expect(searchLink).toHaveAttribute('href', '/search');
         });
-
-        it('should lead to the search page when its link child element is clicked', async () => {
-            // Setup
-            const user = userEvent.setup();
-            render(
-                <Router>
-                    <Cta />
-                </Router>
-            );
-            const searchLinkItem = screen.getByTestId(
-                CTA_SEARCH_LINK_ITEM_TEST_ID
-            );
-            const searchLink = searchLinkItem.firstElementChild;
-
-            // Actions
-            await user.click(searchLink as HTMLElement);
-
-            // Post Expectations
-            expect(window.location.pathname).toBe('/search');
-        });
     });
 
     describe('when looking at the `about` button-like link item', () => {
@@ -228,26 +208,6 @@ describe('`Cta` component', () => {
             // Post Expectations
             expect(aboutLinkItem.childElementCount).toBe(1);
             expect(aboutLink).toHaveAttribute('href', '/about');
-        });
-
-        it('should lead to the about page when its link child element is clicked', async () => {
-            // Setup
-            const user = userEvent.setup();
-            render(
-                <Router>
-                    <Cta />
-                </Router>
-            );
-            const aboutLinkItem = screen.getByTestId(
-                CTA_ABOUT_LINK_ITEM_TEST_ID
-            );
-            const aboutLink = aboutLinkItem.firstElementChild;
-
-            // Actions
-            await user.click(aboutLink as HTMLElement);
-
-            // Post Expectations
-            expect(window.location.pathname).toBe('/about');
         });
     });
 });

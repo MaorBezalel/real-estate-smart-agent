@@ -1,11 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 
-import '../__mocks__/matchMedia.mock';
-
 import { HashRouter as Router } from 'react-router-dom';
-import HomePage from '../HomePage';
 
+import HomePage from '../HomePage';
 import {
     HOME_PAGE_TEST_ID,
     ILLUSTRATION_TEST_ID,
