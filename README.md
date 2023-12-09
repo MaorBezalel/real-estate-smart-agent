@@ -18,7 +18,7 @@
 
 ## 🧐 Introduction <a name = "introduction"></a>
 
-A full-stack web application that allow users to search for various types of houses and apartments across Israel with starightforward and easy to use interface, without ads or any other distractions, and without having to refresh the page to get updated results.The data comes from the well known Israeli [Yad2](https://www.yad2.co.il/) website, and aims to provide a better user experience. Users can search estates for either rent or purchase, and filter the results by price and date. The app also highlights new and updated results for the user's convenience. Each result contains a link to the original post on Yad2, so the user can read more details about the estate and contact the seller directly.
+A full-stack web application that allow users to search for various types of houses and apartments across Israel with starightforward and easy to use interface, without ads or any other distractions, and without having to refresh the page to get updated results. The data comes from the well known Israeli [Yad2](https://www.yad2.co.il/) website, and aims to provide a better user experience. Users can search estates for either rent or purchase, and filter the results by price and date. The app also highlights new and updated results for the user's convenience. Each result contains a link to the original post on Yad2, so the user can read more details about the estate and contact the seller directly.
 
 ## 🏛️ Architecture
 
