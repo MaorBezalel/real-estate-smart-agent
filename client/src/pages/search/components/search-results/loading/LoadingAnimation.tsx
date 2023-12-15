@@ -6,7 +6,7 @@ export default function LoadingAnimation(): React.JSX.Element {
     const [isRenderDotComIdle, setIsRenderDotComIdle] =
         useState<boolean>(false);
 
-    useTimeout(() => setIsRenderDotComIdle(true), 1000 * 8); // 8 seconds
+    useTimeout(() => setIsRenderDotComIdle(true), 1000 * 3); // 3 seconds
 
     return (
         <div className="flex flex-col place-items-center gap-14 tablet-lg:gap-28">

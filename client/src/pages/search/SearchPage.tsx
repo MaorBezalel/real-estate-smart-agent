@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { SearchPageContext } from './SearchPageContext';
+
+import Main from '../../layouts/main/Main';
 
 import Heading from './components/Heading';
 import SearchForm from './components/search-form/SearchForm';
 import Separator from './components/Separator';
 import SearchResults from './components/search-results/SearchResults';
 
-import './assets/animations/loading.css';
+import { TEST_ID } from './utils/constants/testIds';
 
 export default function SearchPage(): React.JSX.Element {
     const [isSubmitSuccessful, setIsSubmitSuccessful] =
@@ -22,12 +24,7 @@ export default function SearchPage(): React.JSX.Element {
                 setIsLoading,
             }}
         >
-            <main
-                className="container mx-auto flex flex-1 flex-col place-items-center gap-4 px-4 pt-4
-                mobile-md:gap-6
-                tablet-sm:gap-7
-                laptop-md:gap-10"
-            >
+            <Main page="search">
                 <Heading />
                 <SearchForm id="real-estate-search-form" />
                 {isSubmitSuccessful && (
@@ -36,7 +33,7 @@ export default function SearchPage(): React.JSX.Element {
                         <SearchResults id="real-estate-output" />
                     </>
                 )}
-            </main>
+            </Main>
         </SearchPageContext.Provider>
     );
 }

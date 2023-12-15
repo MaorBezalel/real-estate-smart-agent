@@ -36,7 +36,7 @@ function YoutubeIcon() {
     return (
         <a
             className="relative flex items-center justify-center rounded-full text-base text-red-600 transition-[color,transform] duration-[294ms] ease-out before:absolute before:inset-0 before:block before:origin-center before:scale-0 before:rounded-full before:bg-[color:var(--color)] before:transition-transform before:duration-[294ms] before:content-[''] hover:text-secondary hover:before:scale-100 tablet-md:h-12 tablet-md:w-12 tablet-lg:h-14 tablet-lg:w-14"
-            href="https://github.com/MaorBezalel/real-estate-smart-agent"
+            href="https://youtu.be/8YtzmtPDKsA"
             target="_blank"
             rel="noopener noreferrer"
         >

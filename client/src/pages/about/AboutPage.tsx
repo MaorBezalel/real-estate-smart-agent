@@ -1,3 +1,5 @@
+import Main from '../../layouts/main/Main';
+
 import Illustration from './components/Illustration';
 import Content from './components/Content';
 
@@ -10,14 +12,9 @@ import { qnaPairs } from './constants/qnaPairs';
  */
 export default function AboutPage(): React.JSX.Element {
     return (
-        <main
-            className="container mx-auto flex flex-1 flex-col items-center justify-around gap-4 px-4 tablet-sm:gap-12 tablet-md:gap-14 tablet-lg:grid tablet-lg:grid-cols-2"
-            style={{ gridTemplateAreas: "'content illustration'" }}
-            aria-label="דף אודות הפרויקט"
-            data-testid={ABOUT_PAGE_TEST_ID}
-        >
+        <Main page="about">
             <Illustration />
             <Content qnaPairs={qnaPairs} />
-        </main>
+        </Main>
     );
 }
