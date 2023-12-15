@@ -7,7 +7,7 @@
         Live
         </a>
         <span> | </span>
-        <a href="#">
+        <a href="https://youtu.be/8YtzmtPDKsA">
         Video
         </a>
     </h3>
@@ -19,10 +19,6 @@
 ## 🧐 Introduction <a name = "introduction"></a>
 
 A full-stack web application that allow users to search for various types of houses and apartments across Israel with starightforward and easy to use interface, without ads or any other distractions, and without having to refresh the page to get updated results. The data comes from the well known Israeli [Yad2](https://www.yad2.co.il/) website, and aims to provide a better user experience. Users can search estates for either rent or purchase, and filter the results by price and date. The app also highlights new and updated results for the user's convenience. Each result contains a link to the original post on Yad2, so the user can read more details about the estate and contact the seller directly.
-
-## 🏛️ Architecture
-
-![Architecture](./assets/architecture.png)
 
 ## ⛏️ Built Using <a name = "built-using"></a>
 
@@ -90,11 +86,13 @@ A full-stack web application that allow users to search for various types of hou
             <td>
                 <a href="https://www.postman.com/"><img src="https://img.shields.io/badge/Postman-FF6C37.svg?style=for-the-badge&logo=Postman&logoColor=white" alt="Postman"></a>
                 <a href="https://www.swagger.io/"><img src="https://img.shields.io/badge/Swagger-85EA2D.svg?style=for-the-badge&logo=Swagger&logoColor=black" alt="Swagger"></a>
-                <a href="https://www.prettier.io/"><img src="https://img.shields.io/badge/prettier-%23F7B93E.svg?style=for-the-badge&logo=prettier&logoColor=black" alt="Prettier"></a>
-                <a href="https://www.fontawesome.com/"><img src="https://img.shields.io/badge/Font%20Awesome-339AF0.svg?style=for-the-badge&logo=Font-Awesome&logoColor=white" alt="Font Awesome"></a>
             </td>
     </tbody>
 </table>
+
+## 🏛️ Architecture
+
+![Architecture](./assets/architecture.png)
 
 ## 🎈 Features <a name="features"></a>
 
@@ -110,6 +108,11 @@ A full-stack web application that allow users to search for various types of hou
 - [Yad2](https://www.yad2.co.il/) - A well known Israeli website for publishing ads for various types of estates, cars, and more.
 - [React Flip Move](https://joshwcomeau.github.io/react-flip-move/) - A React component for animating lists when their order changes or when items are added or removed.
 - [React Lottie](https://www.npmjs.com/package/react-lottie) - A React component for rendering Lottie animations.
+- [React Query](https://react-query.tanstack.com/) - A React library for fetching, caching and updating asynchronous data.
+- [React Hook Form](https://react-hook-form.com/) - A React library for managing form state.
+- [React Router](https://reactrouter.com/) - A React library for routing.
+- [Font Awesome](https://fontawesome.com/) - A library of icons.
+- [IconScout](https://iconscout.com/) - A platform for downloading SVG illustrations and Lottie animations.
 
 ## 🙏 Acknowledgements <a name ="acknowledgements"></a>
 
