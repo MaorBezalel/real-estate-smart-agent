@@ -1,23 +1,19 @@
 import homeDesktopHeading from '../data/svgs/home-desktop-heading.svg';
 import homeMobileHeading from '../data/svgs/home-mobile-heading.svg';
 
+import { TEST_ID } from '../data/constants/testIds';
+
 type PageHeadingProps = {
     page: 'home' | 'search' | 'about';
     content: string;
 };
 
-export default function PageHeading({
-    page,
-    content,
-}: PageHeadingProps): React.JSX.Element {
+export default function PageHeading({ page, content }: PageHeadingProps): React.JSX.Element {
     switch (page) {
         case 'home':
             return (
                 <picture>
-                    <source
-                        srcSet={homeDesktopHeading}
-                        media="(min-width: 1024px)"
-                    />
+                    <source srcSet={homeDesktopHeading} media="(min-width: 1024px)" />
                     <img
                         src={homeMobileHeading}
                         className="scale-[1.2] 
@@ -33,7 +29,7 @@ export default function PageHeading({
                         alt={content}
                         role="heading"
                         aria-level={1}
-                        //data-testid={HEADING_TEST_ID}
+                        data-testid={TEST_ID.COMMON.PAGE_HEADING}
                     />
                 </picture>
             );
@@ -53,7 +49,7 @@ export default function PageHeading({
                         textShadow:
                             '1px 1px 0 #001f24, -1px -1px 0 #001f24, 1px -1px 0 #001f24, -1px 1px 0 #001f24, 1px 1px 0 #001f24',
                     }}
-                    //data-testid={HEADING_TEST_ID}
+                    data-testid={TEST_ID.COMMON.PAGE_HEADING}
                 >
                     {content}
                 </h1>
@@ -74,6 +70,7 @@ export default function PageHeading({
                         textShadow:
                             '1px 1px 0 #001f24, -1px -1px 0 #001f24, 1px -1px 0 #001f24, -1px 1px 0 #001f24, 1px 1px 0 #001f24',
                     }}
+                    data-testid={TEST_ID.COMMON.PAGE_HEADING}
                 >
                     {content}
                 </h1>

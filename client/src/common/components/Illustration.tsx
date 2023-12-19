@@ -3,6 +3,8 @@ import Lottie from 'lottie-react';
 import homePageIllustration from '../../common/data/animations/home-illustration-animation.json';
 import aboutPageIllustration from '../data/svgs/about-illustration.svg';
 
+import { TEST_ID } from '../data/constants/testIds';
+
 type IllustrationProps = {
     forWho: 'home' | 'about'; // TODO: add 'failed-search'
     label: string;
@@ -24,6 +26,7 @@ export default function Illustration({
                     loop={true}
                     aria-roledescription={roleDescription}
                     aria-label={label}
+                    data-testid={TEST_ID.COMMON.ILLUSTRATION}
                 />
             );
 
@@ -36,6 +39,7 @@ export default function Illustration({
                     type="image/svg+xml"
                     aria-roledescription={roleDescription}
                     aria-label={label}
+                    data-testid={TEST_ID.COMMON.ILLUSTRATION}
                 />
             );
     }
