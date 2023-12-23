@@ -7,6 +7,10 @@ import { FormDataInputs } from '..';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
+/**
+ * Renders a select field for choosing the deal type.
+ * @returns {React.JSX.Element} The JSX element representing the deal type select field.
+ */
 export default function DealTypeSelectField(): React.JSX.Element {
     const {
         register,

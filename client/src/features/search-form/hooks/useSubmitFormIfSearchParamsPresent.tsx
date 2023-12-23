@@ -5,10 +5,17 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 import { FormDataInputs } from '..';
 import { formatPrice } from '../helpers';
 
+/**
+ * A hook which responsible for submitting the search form if there are any search params present in the URL on mount.
+ *
+ * @param {SubmitHandler<FormDataInputs>} onSubmit - The submit handler for the form.
+ * @param {SubmitErrorHandler<FormDataInputs>} onError - The error handler for the form.
+ * @returns {void} Nothing.
+ */
 const useSubmitFormIfSearchParamsPresent = (
     onSubmit: SubmitHandler<FormDataInputs>,
     onError: SubmitErrorHandler<FormDataInputs>
-) => {
+): void => {
     const { handleSubmit, setValue } = useFormContext<FormDataInputs>();
     const [searchParams, setSearchParams] = useSearchParams();
     const location = useLocation();

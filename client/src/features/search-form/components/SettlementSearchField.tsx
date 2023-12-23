@@ -9,6 +9,12 @@ import { israeliSettlements } from '../constants';
 
 import { TEST_ID } from '../../../common/data/constants/testIds';
 
+/**
+ * Renders a settlement search field component aswell as its dropdown menu
+ * with the filtered results which is determined by the user's input.
+ *
+ * @returns {React.JSX.Element} The rendered settlement search field component as JSX element.
+ */
 export default function SettlementSearchField(): React.JSX.Element {
     const {
         register,

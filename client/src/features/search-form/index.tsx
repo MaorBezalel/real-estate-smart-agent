@@ -12,6 +12,12 @@ type SearchFormProps = {
     children: React.ReactNode;
 };
 
+/**
+ * Responsible for rendering the search form and handling its submission.
+ *
+ * @param {SearchFormProps} props - The component props.
+ * @returns {React.JSX.Element} The rendered search form.
+ */
 export default function SearchForm({ children }: SearchFormProps): React.JSX.Element {
     const {
         handleSubmit,

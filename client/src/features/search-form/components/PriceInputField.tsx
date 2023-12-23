@@ -11,6 +11,12 @@ type PriceFieldProps = {
     type: 'minPrice' | 'maxPrice';
 };
 
+/**
+ * Renders a price input field component.
+ *
+ * @param {PriceFieldProps} type - The type of the price field (minPrice or maxPrice).
+ * @returns {React.JSX.Element} The rendered price input field component as JSX element.
+ */
 export default function PriceInputField({ type }: PriceFieldProps): React.JSX.Element {
     const {
         register,

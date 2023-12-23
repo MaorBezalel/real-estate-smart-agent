@@ -3,6 +3,12 @@ import { useSearchStateContext } from '../../../common/hooks';
 
 import { TEST_ID } from '../../../common/data/constants/testIds';
 
+/**
+ * Renders a form button component which is responsible for either submitting the form or resetting it.
+ * Also responsible for rendering a loading button with a spinner when the data is being fetched after successful submission.
+ *
+ * @returns {React.JSX.Element} The rendered form button component.
+ */
 export default function FormButton(): React.JSX.Element {
     const { value } = useSearchStateContext();
     switch (value) {
