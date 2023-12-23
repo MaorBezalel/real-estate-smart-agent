@@ -1,17 +1,17 @@
 import { useFormContext } from 'react-hook-form';
-import { FormDataInputs } from './SearchForm';
-import { keepOnlyDigits, formatPrice } from '../../utils/helpers';
+import { FormDataInputs } from '..';
+import { keepOnlyDigits, formatPrice } from '../helpers';
+
+import { TEST_ID } from '../../../common/data/constants/testIds';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShekelSign } from '@fortawesome/free-solid-svg-icons';
 
 type PriceFieldProps = {
-    type: 'min-price' | 'max-price';
+    type: 'minPrice' | 'maxPrice';
 };
 
-export default function PriceInputField({
-    type,
-}: PriceFieldProps): React.JSX.Element {
+export default function PriceInputField({ type }: PriceFieldProps): React.JSX.Element {
     const {
         register,
         formState: { isSubmitSuccessful, errors },
@@ -30,25 +30,25 @@ export default function PriceInputField({
                 className="peer flex w-full items-center rounded-lg py-2 pl-10 pr-1 text-text shadow-lg outline outline-1 outline-text 
                 focus:outline-2 focus:outline-primary 
                 disabled:cursor-not-allowed disabled:opacity-50
-                aria-[invalid=true]:text-[red] aria-[invalid=true]:outline-[red] aria-[invalid=true]:focus:outline-[red]
+                aria-[invalid=true]:text-[red] aria-[invalid=true]:outline-[red] aria-[invalid=true]:placeholder:text-[red] aria-[invalid=true]:placeholder:text-opacity-50 aria-[invalid=true]:focus:outline-[red]
                 tablet-sm:text-lg 
                 laptop-sm:text-xl 
                 laptop-md:text-2xl"
-                id={type}
+                id={`${type}-input-field`}
                 type="text"
                 inputMode="numeric"
                 autoComplete="off"
-                placeholder={
-                    type === 'min-price' ? 'מחיר מינימלי...' : 'מחיר מקסימלי...'
-                }
+                placeholder={`מחיר ${type === 'minPrice' ? 'מינימלי' : 'מקסימלי'}...`}
                 aria-invalid={!!errors[type]}
                 aria-required={true}
-                aria-label={`הכנס מחיר ${
-                    type === 'min-price' ? 'מינימלי' : 'מקסימלי'
-                }`}
-                aria-placeholder={`מחיר ${
-                    type === 'min-price' ? 'מינימלי' : 'מקסימלי'
-                }...`}
+                aria-label={`הכנס מחיר ${type === 'minPrice' ? 'מינימלי' : 'מקסימלי'}`}
+                aria-placeholder={`מחיר ${type === 'minPrice' ? 'מינימלי' : 'מקסימלי'}...`}
+                aria-errormessage={`${type}-input-field-error-message`}
+                data-testid={
+                    type === 'minPrice'
+                        ? TEST_ID.FEATURE.SEARCH_FORM.PRICE_INPUT_FIELD.MIN_PRICE.INPUT
+                        : TEST_ID.FEATURE.SEARCH_FORM.PRICE_INPUT_FIELD.MAX_PRICE.INPUT
+                }
                 {...register(type, {
                     required: {
                         value: true,
@@ -68,36 +68,44 @@ export default function PriceInputField({
                         message: 'הכנס מספרים בלבד',
                     },
                     onChange: handleChange,
-                    setValueAs: (value: string) =>
-                        Number(keepOnlyDigits(value)), // WARNING: TypeScript will still consider the value as a string.
+                    setValueAs: (value: string) => (value !== '' ? Number(keepOnlyDigits(value)) : ''),
                     validate: {
                         minPrice: (value: string, values: FormDataInputs) => {
-                            if (type === 'max-price') return true;
+                            if (type === 'maxPrice') return true;
+                            if (values['maxPrice'] === '') return true;
                             return (
-                                Number(value) <= Number(values['max-price']) ||
+                                Number(value) <= Number(values['maxPrice']) ||
                                 'מחיר מינימלי חייב להיות נמוך ממחיר מקסימלי'
                             );
                         },
                         maxPrice: (value: string, values: FormDataInputs) => {
-                            if (type === 'min-price') return true;
+                            if (type === 'minPrice') return true;
+                            if (values['minPrice'] === '') return true;
                             return (
-                                Number(value) >= Number(values['min-price']) ||
+                                Number(value) >= Number(values['minPrice']) ||
                                 'מחיר מקסימלי חייב להיות גבוה ממחיר מינימלי'
                             );
                         },
                     },
                 })}
             />
-            <label
+            <div
                 className="absolute right-0 top-10 hidden text-sm font-medium text-[red] transition duration-200 ease-in-out
                 peer-aria-[invalid=true]:inline
                 mobile-md:text-base
                 tablet-sm:top-12 tablet-sm:text-sm
                 tablet-md:text-base"
-                htmlFor={type}
+                id={`${type}-input-field-error-message`}
+                role="alert"
+                aria-hidden={!errors[type]}
+                data-testid={
+                    type === 'minPrice'
+                        ? TEST_ID.FEATURE.SEARCH_FORM.PRICE_INPUT_FIELD.MIN_PRICE.ERROR_MESSAGE
+                        : TEST_ID.FEATURE.SEARCH_FORM.PRICE_INPUT_FIELD.MAX_PRICE.ERROR_MESSAGE
+                }
             >
                 {errors[type]?.message || 'שגיאה'}
-            </label>
+            </div>
             <FontAwesomeIcon
                 icon={faShekelSign}
                 className="absolute left-2 top-1/2 -translate-y-1/2 text-accent transition duration-200 ease-in-out
@@ -107,6 +115,7 @@ export default function PriceInputField({
                 tablet-sm:text-lg 
                 laptop-sm:text-xl
                 laptop-md:text-2xl"
+                data-testid={TEST_ID.FEATURE.SEARCH_FORM.PRICE_INPUT_FIELD.SVG_ICON}
             />
         </div>
     );

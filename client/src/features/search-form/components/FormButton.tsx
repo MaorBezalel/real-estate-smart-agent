@@ -1,27 +1,15 @@
-export type FormButtonProps =
-    | SubmitButtonProps
-    | ResetButtonProps
-    | LoadingButtonProps;
+import { useSearchFormActions } from '../hooks';
+import { useSearchStateContext } from '../../../common/hooks';
 
-type SubmitButtonProps = {
-    type: 'submit';
-};
+import { TEST_ID } from '../../../common/data/constants/testIds';
 
-type ResetButtonProps = {
-    type: 'reset';
-    onReset: () => void;
-};
-
-type LoadingButtonProps = {
-    type: 'loading';
-};
-
-export default function FormButton(props: FormButtonProps): React.JSX.Element {
-    switch (props.type) {
-        case 'submit':
+export default function FormButton(): React.JSX.Element {
+    const { value } = useSearchStateContext();
+    switch (value) {
+        case 'inactive':
             return <SubmitButton />;
-        case 'reset':
-            return <ResetButton type={props.type} onReset={props.onReset} />;
+        case 'active':
+            return <ResetButton />;
         case 'loading':
             return <LoadingButton />;
     }
@@ -38,13 +26,15 @@ const SubmitButton = (): React.JSX.Element => {
             id="submit-button"
             type="submit"
             aria-disabled="false"
+            data-testid={TEST_ID.FEATURE.SEARCH_FORM.FORM_BUTTON.INACTIVE}
         >
             הפעל
         </button>
     );
 };
 
-const ResetButton = ({ onReset }: ResetButtonProps): React.JSX.Element => {
+const ResetButton = (): React.JSX.Element => {
+    const { onReset } = useSearchFormActions();
     return (
         <button
             className="inline-block w-full place-self-center rounded-2xl border-4 border-solid border-text bg-red-600 py-3 text-center text-3xl font-extrabold text-background drop-shadow-xl duration-200 hover:scale-110 hover:filter hover:ease-in-out focus:brightness-110
@@ -56,6 +46,7 @@ const ResetButton = ({ onReset }: ResetButtonProps): React.JSX.Element => {
             type="button"
             aria-disabled="false"
             onClick={onReset}
+            data-testid={TEST_ID.FEATURE.SEARCH_FORM.FORM_BUTTON.ACTIVE}
         >
             בטל
         </button>
@@ -74,6 +65,7 @@ const LoadingButton = (): React.JSX.Element => {
             type="button"
             disabled
             aria-disabled="true"
+            data-testid={TEST_ID.FEATURE.SEARCH_FORM.FORM_BUTTON.LOADING}
         >
             <svg
                 className="me-4 inline h-8 w-8 animate-spin text-background

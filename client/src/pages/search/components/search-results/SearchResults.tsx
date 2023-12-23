@@ -1,11 +1,7 @@
-import { useState, useEffect, useMemo, useContext } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSmartAgent } from '../../hooks';
-
-import {
-    SearchPageContext,
-    SearchPageContextType,
-} from '../../SearchPageContext';
+import { useSearchStateContext } from '../../../../common/hooks';
 
 import { SearchResultsHeader, TotalAmount, SortBy } from './header';
 
@@ -14,25 +10,15 @@ import LoadingAnimation from './loading/LoadingAnimation';
 
 import RealEstateList from 'react-flip-move';
 import RealEstateItem from './real-estate-item/RealEstateItem';
-import {
-    Pagination,
-    PaginationNumberList,
-    PaginationNumber,
-    PaginationButton,
-} from './pagination';
+import { Pagination, PaginationNumberList, PaginationNumber, PaginationButton } from './pagination';
 
-import {
-    generatePagination,
-    sortObjectsByDate,
-    sortObjectsByPrice,
-} from '../../utils/helpers';
+import { generatePagination, sortObjectsByDate, sortObjectsByPrice } from '../../utils/helpers';
 import { RealEstateDto } from '../../utils/dtos/real-estate.dto';
 
-export default function SearchResults(
-    props: React.OutputHTMLAttributes<HTMLOutputElement>
-): React.JSX.Element {
+export default function SearchResults(): React.JSX.Element {
     const { query, mutation } = useSmartAgent(1000 * 10); // 10 seconds
     const [searchParams, _] = useSearchParams();
+    const { setToLoading, setToActive } = useSearchStateContext();
 
     const [sortBy, setSortBy] = useState<string>('לפי תאריך');
     const sortedItems: RealEstateDto[] | undefined = useMemo(() => {
@@ -52,14 +38,11 @@ export default function SearchResults(
         }
     }, [query.data?.items, sortBy]);
 
-    const { setIsLoading } = useContext(
-        SearchPageContext
-    ) as SearchPageContextType;
     useEffect(() => {
         if (query.isLoading && !hasErrorOccured) {
-            setIsLoading(true);
+            setToLoading();
         } else {
-            setIsLoading(false);
+            setToActive();
         }
     }, [query.isLoading]);
 
@@ -78,7 +61,6 @@ export default function SearchResults(
     }
 
     if (query.isError || hasErrorOccured) {
-        console.log('query.isError');
         return (
             <FailedSearchError>
                 <Content />
@@ -94,15 +76,11 @@ export default function SearchResults(
     };
 
     return (
-        <section className="flex h-full w-full flex-col gap-4" {...props}>
+        <section className="flex h-full w-full flex-col gap-4" id="real-estate-output">
             <SearchResultsHeader>
                 <TotalAmount totalAmount={sortedItems?.length || 0} />
                 <SortBy
-                    options={[
-                        'לפי תאריך',
-                        'מחיר - מהזול ליקר',
-                        'מחיר - מהיקר לזול',
-                    ]}
+                    options={['לפי תאריך', 'מחיר - מהזול ליקר', 'מחיר - מהיקר לזול']}
                     selectedOption={sortBy}
                     setSelectedOption={setSortBy}
                 />
@@ -115,21 +93,17 @@ export default function SearchResults(
                 staggerDurationBy={50}
             >
                 {sortedItems?.map((realEstate) => (
-                    <RealEstateItem
-                        key={realEstate.linkToken}
-                        {...realEstate}
-                    />
+                    <RealEstateItem key={realEstate.linkToken} {...realEstate} />
                 ))}
             </RealEstateList>
             <Pagination id="pagination" {...paginationProps}>
                 <PaginationButton type="prev" />
                 <PaginationNumberList>
-                    {generatePagination(
-                        paginationProps.currentPage,
-                        paginationProps.totalPages
-                    ).map((pageNumber, index) => (
-                        <PaginationNumber key={index} pageNumber={pageNumber} />
-                    ))}
+                    {generatePagination(paginationProps.currentPage, paginationProps.totalPages).map(
+                        (pageNumber, index) => (
+                            <PaginationNumber key={index} pageNumber={pageNumber} />
+                        )
+                    )}
                 </PaginationNumberList>
                 <PaginationButton type="next" />
             </Pagination>

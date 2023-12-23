@@ -1,8 +1,8 @@
-import useOnUnmount from './useOnUnmount';
+import useOnUnmount from '../../../common/hooks/useOnUnmount';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 import { useEventListener } from './useEventListener';
 import useSmartAgent from './useSmartAgent';
-import useDebounce from './useDebounce';
+import useDebounce from '../../../features/search-form/hooks/useDebounce';
 import useTimeout from './useTimeout';
 
 export {

@@ -1,41 +1,47 @@
-import { useState } from 'react';
-import { SearchPageContext } from './SearchPageContext';
+import { useSearchState } from '../../common/hooks';
+
+import { SearchStateContext } from '../../common/contexts';
+import { SearchFormContext } from '../../features/search-form/contexts';
 
 import Main from '../../layouts/main/Main';
 
 import PageHeading from '../../common/components/PageHeading';
-import SearchForm from './components/search-form/SearchForm';
 import Separator from './components/Separator';
 import SearchResults from './components/search-results/SearchResults';
 
-import { TEST_ID } from './utils/constants/testIds';
+import SearchForm from '../../features/search-form';
+import {
+    DealTypeSelectField,
+    FormButton,
+    PriceInputField,
+    SettlementSearchField,
+} from '../../features/search-form/components';
 
 export default function SearchPage(): React.JSX.Element {
-    const [isSubmitSuccessful, setIsSubmitSuccessful] =
-        useState<boolean>(false);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const searchState = useSearchState();
 
     const [page, headingContent] = ['search' as 'search', 'חיפוש נדל"ן:'];
 
     return (
-        <SearchPageContext.Provider
-            value={{
-                isSubmitSuccessful,
-                setIsSubmitSuccessful,
-                isLoading,
-                setIsLoading,
-            }}
-        >
+        <SearchStateContext.Provider value={searchState}>
             <Main page="search">
                 <PageHeading page={page} content={headingContent} />
-                <SearchForm id="real-estate-search-form" />
-                {isSubmitSuccessful && (
+                <SearchFormContext>
+                    <SearchForm>
+                        <DealTypeSelectField />
+                        <SettlementSearchField />
+                        <PriceInputField type="minPrice" />
+                        <PriceInputField type="maxPrice" />
+                        <FormButton />
+                    </SearchForm>
+                </SearchFormContext>
+                {!searchState.isInactive() && (
                     <>
                         <Separator />
-                        <SearchResults id="real-estate-output" />
+                        <SearchResults />
                     </>
                 )}
             </Main>
-        </SearchPageContext.Provider>
+        </SearchStateContext.Provider>
     );
 }

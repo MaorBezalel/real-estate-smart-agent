@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 /**
- * An hook that executes a callback function after a specified delay.
+ * A hook that executes a callback function after a specified delay.
  * @param {() => void} callback - The callback function to be executed.
  * @param {number | null} delay - The delay in milliseconds before executing the callback.
  */
