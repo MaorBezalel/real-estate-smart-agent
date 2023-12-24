@@ -62,7 +62,7 @@ export default function SettlementSearchField(): React.JSX.Element {
                         message: 'שדה חובה',
                     },
                     pattern: {
-                        value: /^[\u0590-\u05FF\s-]+$/,
+                        value: /^[\u0590-\u05FF\s-']+$/,
                         message: 'הכנס אותיות בעברית בלבד',
                     },
                     disabled: isSubmitSuccessful,
