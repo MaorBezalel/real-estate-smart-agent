@@ -24,6 +24,14 @@ describe('HomePageCta', () => {
         expect(component).toBeInTheDocument();
     });
 
+    it('should render the component with an aria-roledescription attribute', () => {
+        // Arrange
+        const component = screen.getByTestId(testId);
+
+        // Assert
+        expect(component).toHaveAttribute('aria-roledescription', 'Call To Action');
+    });
+
     it('should render 2 links - primary and secondary', () => {
         // Arrange
         const component = screen.getByTestId(testId);

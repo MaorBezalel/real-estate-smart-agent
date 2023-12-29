@@ -1,3 +1,5 @@
+import { TEST_ID } from '@common/data/constants/testIds';
+
 export default function SearchPageHeading(): React.JSX.Element {
     return (
         <h1
@@ -13,6 +15,7 @@ export default function SearchPageHeading(): React.JSX.Element {
                 textShadow:
                     '1px 1px 0 #001f24, -1px -1px 0 #001f24, 1px -1px 0 #001f24, -1px 1px 0 #001f24, 1px 1px 0 #001f24',
             }}
+            data-testid={TEST_ID.COMMON.PAGE_HEADING.SEARCH_PAGE}
         >
             חיפוש נדל"ן:
         </h1>

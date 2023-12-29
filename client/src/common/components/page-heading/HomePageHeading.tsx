@@ -1,6 +1,8 @@
 import homeDesktopHeading from '@common/assets/svgs/home-desktop-heading.svg';
 import homeMobileHeading from '@common/assets/svgs/home-mobile-heading.svg';
 
+import { TEST_ID } from '@common/data/constants/testIds';
+
 export default function PageHeading(): React.JSX.Element {
     return (
         <picture>
@@ -20,6 +22,7 @@ export default function PageHeading(): React.JSX.Element {
                 alt="מצאו בקלות את הנכס המושלם עבורכם!"
                 role="heading"
                 aria-level={1}
+                data-testid={TEST_ID.COMMON.PAGE_HEADING.HOME_PAGE}
             />
         </picture>
     );

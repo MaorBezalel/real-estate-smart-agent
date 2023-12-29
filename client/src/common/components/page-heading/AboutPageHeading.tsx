@@ -1,3 +1,5 @@
+import { TEST_ID } from '@common/data/constants/testIds';
+
 export default function AboutPageHeading(): React.JSX.Element {
     return (
         <h1
@@ -13,6 +15,7 @@ export default function AboutPageHeading(): React.JSX.Element {
                 textShadow:
                     '1px 1px 0 #001f24, -1px -1px 0 #001f24, 1px -1px 0 #001f24, -1px 1px 0 #001f24, 1px 1px 0 #001f24',
             }}
+            data-testid={TEST_ID.COMMON.PAGE_HEADING.ABOUT_PAGE}
         >
             אודות הפרויקט:
         </h1>

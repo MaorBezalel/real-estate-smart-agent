@@ -9,6 +9,19 @@ export const TEST_ID = {
         CTA: {
             HOME_PAGE: 'common-cta-home-page',
         },
+
+        ILLUSTRATION: {
+            ABOUT_PAGE: 'common-illustration-about-page',
+            FAILED_RESULTS: 'common-illustration-failed-results',
+            HOME_PAGE: 'common-illustration-home-page',
+            LOADING_RESULTS: 'common-illustration-loading-results',
+        },
+
+        PAGE_HEADING: {
+            ABOUT_PAGE: 'common-page-heading-about-page',
+            HOME_PAGE: 'common-page-heading-home-page',
+            SEARCH_PAGE: 'common-page-heading-search-page',
+        },
     },
 
     FEATURE: {
@@ -47,4 +60,4 @@ export const TEST_ID = {
             },
         }
     }
-}
+} as const;
