@@ -1,5 +1,5 @@
 import axios from "axios";
-import { InitialRealEstateGetResponseDto } from "../../pages/search/utils/dtos/responses.dto";
+import { InitialRealEstateGetResponseDto } from '@common/data/dtos/responses.dto';
 
 /**
  * Fetches initial data from the API based on the provided search parameters.

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UpdatedRealEstateGetResponseDto } from "../../pages/search/utils/dtos/responses.dto";
+import { UpdatedRealEstateGetResponseDto } from '@common/data/dtos/responses.dto';
 
 /**
  * Fetches updated data from the API based on the provided search ID.

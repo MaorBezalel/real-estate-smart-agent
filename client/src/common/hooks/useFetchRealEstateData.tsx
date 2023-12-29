@@ -7,7 +7,7 @@ import { fetchInitialData, fetchUpdatedData } from '../services';
 import {
     InitialRealEstateGetResponseDto,
     UpdatedRealEstateGetResponseDto,
-} from '../../pages/search/utils/dtos/responses.dto';
+} from '@common/data/dtos/responses.dto';
 
 type UseFetchRealEstateDataResult = {
     query: UseQueryResult<InitialRealEstateGetResponseDto | UpdatedRealEstateGetResponseDto, Error>;
