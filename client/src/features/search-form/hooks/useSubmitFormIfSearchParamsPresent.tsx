@@ -26,18 +26,17 @@ const useSubmitFormIfSearchParamsPresent = (
         const minPrice = searchParams.get('minPrice') ?? '';
         const maxPrice = searchParams.get('maxPrice') ?? '';
 
-        const hasAnyValidSearchParams = dealType || settlement || minPrice || maxPrice;
-        if (!hasAnyValidSearchParams) {
+        const dontHaveAnyValidSearchParams = !(dealType || settlement || minPrice || maxPrice);
+        if (dontHaveAnyValidSearchParams) {
             setSearchParams({});
-            return;
+        } else {
+            setValue('dealType', dealType);
+            setValue('settlement', settlement);
+            setValue('minPrice', formatPrice(minPrice, false));
+            setValue('maxPrice', formatPrice(maxPrice, false));
+
+            handleSubmit(onSubmit, onError)();
         }
-
-        setValue('dealType', dealType);
-        setValue('settlement', settlement);
-        setValue('minPrice', formatPrice(minPrice, false));
-        setValue('maxPrice', formatPrice(maxPrice, false));
-
-        handleSubmit(onSubmit, onError)();
     }, [location.search]);
 };
 

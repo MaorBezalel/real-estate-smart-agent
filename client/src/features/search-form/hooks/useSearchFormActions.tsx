@@ -24,10 +24,15 @@ export default function useSearchFormActions(): UseSearchFormActionsResults {
     const onSubmit: SubmitHandler<FormDataInputs> = (formDataInputs) => {
         const wasSubmittedThroughURL = location.search !== '';
         const wasSubmittedWithoutPagination = !searchParams.get('page');
+        const wasSubmittedWithoutOrderId = !searchParams.get('orderId');
 
         if (wasSubmittedThroughURL) {
             if (wasSubmittedWithoutPagination) {
                 searchParams.set('page', '1');
+                setSearchParams(searchParams);
+            }
+            if (wasSubmittedWithoutOrderId) {
+                searchParams.set('orderId', '1');
                 setSearchParams(searchParams);
             }
         } else {
@@ -38,6 +43,7 @@ export default function useSearchFormActions(): UseSearchFormActionsResults {
                 minPrice: formDataInputs['minPrice'].toString(),
                 maxPrice: formDataInputs['maxPrice'].toString(),
                 page: '1',
+                orderId: '1',
             });
         }
 
