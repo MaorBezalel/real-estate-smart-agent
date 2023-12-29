@@ -1,8 +1,14 @@
 export const TEST_ID = {
     COMMON: {
-        CONTAINER: 'common-container',
-        ILLUSTRATION: 'common-illustration',
-        PAGE_HEADING: 'common-page-heading',
+        CONTENT: {
+            ABOUT_PAGE: 'common-content-about-page',
+            FAILED_RESULTS: 'common-content-failed-results',
+            LOADING_RESULTS: 'common-content-loading-results',
+        },
+
+        CTA: {
+            HOME_PAGE: 'common-cta-home-page',
+        },
     },
 
     FEATURE: {

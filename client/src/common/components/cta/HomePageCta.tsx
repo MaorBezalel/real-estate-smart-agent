@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { TEST_ID } from '@common/data/constants/testIds';
 
 /**
  * Renders a Call To Action component with links to other pages.
@@ -10,12 +11,10 @@ export default function HomePageCta(): React.JSX.Element {
             className="h-full min-w-full pr-1 tablet-sm:mb-3 tablet-lg:min-w-fit"
             style={{ gridArea: 'cta' }}
             aria-roledescription="Call To Action"
+            data-testid={TEST_ID.COMMON.CTA.HOME_PAGE}
         >
-            <ul
-                className="flex min-w-full items-center justify-center gap-4 mobile-md:gap-11 mobile-lg:gap-14 tablet-sm:gap-20 tablet-md:gap-32 tablet-lg:items-center tablet-lg:justify-start tablet-lg:gap-10 laptop-sm:mt-14 laptop-lg:gap-20"
-                aria-label="רשימת קישורים דמויי כפתורים לדפים נוספים"
-            >
-                <li aria-label='קישור לדף חיפוש נדל"ן'>
+            <ul className="flex min-w-full items-center justify-center gap-4 mobile-md:gap-11 mobile-lg:gap-14 tablet-sm:gap-20 tablet-md:gap-32 tablet-lg:items-center tablet-lg:justify-start tablet-lg:gap-10 laptop-sm:mt-14 laptop-lg:gap-20">
+                <li>
                     <Link
                         reloadDocument
                         to="/search"
@@ -24,7 +23,7 @@ export default function HomePageCta(): React.JSX.Element {
                         חיפוש נדל"ן
                     </Link>
                 </li>
-                <li aria-label="קישור לדף אודות">
+                <li>
                     <Link
                         reloadDocument
                         to="/about"

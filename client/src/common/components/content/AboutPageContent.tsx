@@ -1,3 +1,5 @@
+import { TEST_ID } from '@common/data/constants/testIds';
+
 export default function AboutPageContent(): React.JSX.Element {
     const content = [
         {
@@ -24,7 +26,7 @@ export default function AboutPageContent(): React.JSX.Element {
         <>
             {content.map(({ heading, paragraph }) => {
                 return (
-                    <section className="flex flex-col gap-2">
+                    <section className="flex flex-col gap-2" data-testid={TEST_ID.COMMON.CONTENT.ABOUT_PAGE}>
                         <h2
                             className="text-center text-xl font-bold text-secondary underline underline-offset-4 antialiased mobile-md:text-2xl mobile-lg:text-3xl tablet-md:text-4xl tablet-lg:text-start tablet-lg:text-3xl laptop-sm:text-4xl laptop-md:text-[2.5rem] laptop-lg:text-[2.75rem]"
                             style={{

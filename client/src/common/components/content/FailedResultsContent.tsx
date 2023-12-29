@@ -1,19 +1,22 @@
+import { TEST_ID } from '@common/data/constants/testIds';
+
 export default function FailedResultsContent(): React.JSX.Element {
     return (
         <div
             className="flex flex-col gap-2
-                tablet-lg:mt-10 tablet-lg:items-start tablet-lg:justify-start tablet-lg:gap-6
-                laptop-sm:mt-20 laptop-sm:gap-8
-                laptop-md:gap-12"
+            tablet-lg:mt-10 tablet-lg:items-start tablet-lg:justify-start tablet-lg:gap-6
+            laptop-sm:mt-20 laptop-sm:gap-8
+            laptop-md:gap-12"
+            data-testid={TEST_ID.COMMON.CONTENT.FAILED_RESULTS}
         >
             <h2
                 className="text-center text-2xl font-bold underline underline-offset-4 antialiased
-                    mobile-md:text-3xl
-                    mobile-lg:text-4xl
-                    tablet-sm:text-5xl
-                    tablet-lg:text-start
-                    laptop-sm:text-[3.25rem]
-                    laptop-md:text-[3.5rem]"
+                mobile-md:text-3xl
+                mobile-lg:text-4xl
+                tablet-sm:text-5xl
+                tablet-lg:text-start
+                laptop-sm:text-[3.25rem]
+                laptop-md:text-[3.5rem]"
             >
                 אין תוצאות זמינות כרגע!
             </h2>
@@ -55,7 +58,7 @@ export default function FailedResultsContent(): React.JSX.Element {
                         laptop-sm:text-3xl
                         laptop-md:text-4xl"
                 >
-                    ניתן להמתין או לחפש אחר סוגי נכסים אחרים.
+                    ניתן להמתין או לנסות שוב מאוחר יותר.
                 </p>
             </div>
         </div>

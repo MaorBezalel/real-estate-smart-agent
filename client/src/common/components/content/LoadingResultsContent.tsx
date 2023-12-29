@@ -1,6 +1,11 @@
+import { TEST_ID } from '@common/data/constants/testIds';
+
 export default function LoadingResultsContent(): React.JSX.Element {
     return (
-        <div className="flex flex-col place-items-center gap-2 laptop-lg:gap-6">
+        <div
+            className="flex flex-col place-items-center gap-2 laptop-lg:gap-6"
+            data-testid={TEST_ID.COMMON.CONTENT.LOADING_RESULTS}
+        >
             <h2
                 className="text-xl font-bold text-text underline underline-offset-4
                 mobile-lg:text-2xl
@@ -20,8 +25,7 @@ export default function LoadingResultsContent(): React.JSX.Element {
                 laptop-sm:px-72 laptop-sm:text-2xl
                 laptop-md:px-80"
             >
-                החיפוש בהתחלה עלול להימשך עד כדקה בגלל ששרת ה-backend של הפרויקט יושב על השרתים החינמיים
-                של{' '}
+                החיפוש בהתחלה עלול להימשך עד כדקה בגלל ששרת ה-backend של הפרויקט יושב על השרתים החינמיים של{' '}
                 <a
                     className="text-primary hover:text-accent"
                     href="https://render.com/"
