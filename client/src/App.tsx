@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Header from './layouts/header/Header';
+import Header from '@layouts/header/Header';
 
-import HomePage from './pages/home/HomePage';
-import AboutPage from './pages/about/AboutPage';
-import SearchPage from './pages/search/SearchPage';
+import HomePage from '@pages/HomePage';
+import AboutPage from '@pages/AboutPage';
+import SearchPage from '@pages/SearchPage';
 
 export default function App() {
     return (
