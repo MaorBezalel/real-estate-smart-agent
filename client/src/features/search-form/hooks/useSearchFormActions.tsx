@@ -17,7 +17,7 @@ type UseSearchFormActionsResults = {
  */
 export default function useSearchFormActions(): UseSearchFormActionsResults {
     const { reset } = useFormContext<FormDataInputs>();
-    const { setToLoading, setToInactive } = useSearchStateContext();
+    const { setToLoading, setToInactive, isActive } = useSearchStateContext();
     const [searchParams, setSearchParams] = useSearchParams();
     const location = useLocation();
 
@@ -47,7 +47,7 @@ export default function useSearchFormActions(): UseSearchFormActionsResults {
             });
         }
 
-        setToLoading();
+        if (!isActive()) setToLoading();
     };
 
     const onError: SubmitErrorHandler<FormDataInputs> = () => {

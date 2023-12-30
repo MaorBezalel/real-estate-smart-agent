@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import { deleteDataWithAxios, deleteDataWithBeacon } from '../services';
 
@@ -19,13 +19,11 @@ export default function useDeleteDataFromDB(
     searchId: string,
     setSearchId: Dispatch<SetStateAction<string>>
 ): UseDeleteDataFromDBResult {
-    const queryClient = useQueryClient();
     const mutation = useMutation({ mutationFn: () => deleteDataWithAxios(searchId) });
 
     const deleteDataExplicitly = () => {
         mutation.mutate();
         setSearchId('');
-        queryClient.clear();
     };
     const deleteDataImplicitly = () => deleteDataWithBeacon(searchId);
 

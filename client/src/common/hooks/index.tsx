@@ -6,7 +6,7 @@ import useFetchRealEstateData from './useFetchRealEstateData';
 import useDeleteDataFromDB from './useDeleteDataFromDB';
 import usePageHide from './usePageHide';
 import useCancelSearch from './useCancelSearch';
-import useSearchResultsState from './useSearchResultsState';
+import useManageSearchResultsDuringFetch from './useManageSearchResultsDuringFetch';
 import useOrderItems from './useOrderItems';
 
 export {
@@ -19,6 +19,6 @@ export {
     useDeleteDataFromDB,
     usePageHide,
     useCancelSearch,
-    useSearchResultsState,
+    useManageSearchResultsDuringFetch,
     useOrderItems,
 };

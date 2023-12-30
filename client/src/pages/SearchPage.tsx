@@ -2,7 +2,7 @@ import {
     useSearchState,
     useFetchRealEstateData,
     useCancelSearch,
-    useSearchResultsState,
+    useManageSearchResultsDuringFetch,
     useOrderItems,
 } from '@common/hooks';
 
@@ -41,18 +41,18 @@ export default function SearchPage(): React.JSX.Element {
     const { query, searchId, setSearchId } = useFetchRealEstateData(!searchState.isInactive());
     useCancelSearch(searchState.isInactive(), searchId, setSearchId);
 
-    const { isLoadingBeforeError, isLoadingAfterError } = useSearchResultsState({
+    const { isLoadingBeforeError, isLoadingAfterError } = useManageSearchResultsDuringFetch({
         isQuery: {
             loading: query.isLoading,
             error: query.isError,
             success: query.isSuccess,
         },
+
         isSearch: {
-            loading: searchState.isLoading(),
-            active: searchState.isActive(),
+            inactive: searchState.isInactive(),
         },
+
         setSearchTo: {
-            loading: searchState.setToLoading,
             active: searchState.setToActive,
         },
     });
