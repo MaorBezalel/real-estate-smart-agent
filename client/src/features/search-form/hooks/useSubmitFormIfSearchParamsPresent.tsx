@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { SubmitErrorHandler, SubmitHandler, useFormContext } from 'react-hook-form';
 import { useSearchParams, useLocation } from 'react-router-dom';
 
-import { FormDataInputs } from '..';
-import { formatPrice } from '../helpers';
+import { FormDataInputs } from '@features/search-form';
+import { formatPrice } from '@features/search-form/helpers';
 
 /**
  * A hook which responsible for submitting the search form if there are any search params present in the URL on mount.

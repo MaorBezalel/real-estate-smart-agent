@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useDebounce } from '.';
+import { useDebounce } from '@features/search-form/hooks';
 
 import { getTopMatches } from '../helpers';
 

@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-import { useBoolean, useOnUnmount } from '../../../common/hooks';
+import { useBoolean, useOnUnmount } from '@common/hooks';
 
 import { UseFormSetValue } from 'react-hook-form';
 import { FormDataInputs } from '..';

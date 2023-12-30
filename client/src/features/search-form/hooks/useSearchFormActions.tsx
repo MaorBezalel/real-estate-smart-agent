@@ -1,8 +1,8 @@
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { useFormContext, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
-import { useSearchStateContext } from '../../../common/hooks';
+import { useSearchStateContext } from '@common/hooks';
 
-import { FormDataInputs } from '..';
+import { FormDataInputs } from '@features/search-form';
 
 type UseSearchFormActionsResults = {
     onSubmit: SubmitHandler<FormDataInputs>;
