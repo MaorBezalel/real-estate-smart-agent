@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
+import { TEST_ID } from '@common/data/constants/testIds';
+
 type PaginationButtonProps = {
     type: 'prev' | 'next';
 };
@@ -33,11 +35,9 @@ const PrevPageButton = (): React.JSX.Element => {
                 search: location.search.replace(`page=${currentPage}`, `page=${currentPage - 1}`),
             }}
             aria-disabled={currentPage === 1}
+            data-testid={TEST_ID.FEATURE.PAGINATION.PAGINATION_BUTTON}
         >
-            <FontAwesomeIcon
-                icon={faChevronRight}
-                className="text-text group-aria-disabled:text-gray-500"
-            />
+            <FontAwesomeIcon icon={faChevronRight} className="text-text group-aria-disabled:text-gray-500" />
             <span className="font-medium text-text group-aria-disabled:text-gray-500">הקודם</span>
         </Link>
     );
@@ -59,12 +59,10 @@ const NextPageButton = (): React.JSX.Element => {
                 search: location.search.replace(`page=${currentPage}`, `page=${currentPage + 1}`),
             }}
             aria-disabled={currentPage === totalPages}
+            data-testid={TEST_ID.FEATURE.PAGINATION.PAGINATION_BUTTON}
         >
             <span className="font-bold text-accent group-aria-disabled:text-gray-500">הבא</span>
-            <FontAwesomeIcon
-                icon={faChevronLeft}
-                className="text-accent group-aria-disabled:text-gray-500"
-            />
+            <FontAwesomeIcon icon={faChevronLeft} className="text-accent group-aria-disabled:text-gray-500" />
         </Link>
     );
 };

@@ -58,6 +58,12 @@ export const TEST_ID = {
                 MENU: 'feature-search-form-settlement-search-field-menu',
                 MENU_ITEM: 'feature-search-form-settlement-search-field-menu-item',
             },
-        }
+        },
+
+        PAGINATION: {
+            PAGE_NUMBER_BUTTON: 'feature-pagination-page-number-button',
+            PAGINATION_BUTTON: 'feature-pagination-pagination-button',
+            PAGINATION_BODY: 'feature-pagination-pagination-body',
+        },
     }
 } as const;
