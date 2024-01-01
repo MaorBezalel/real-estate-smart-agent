@@ -172,6 +172,7 @@ export class RealEstateController {
         @Query('minPrice') minPrice: number,
         @Query('maxPrice') maxPrice: number,
         @Query('page') page?: number,
+        @Query('saveToDb') saveToDb?: boolean,
     ): Promise<GetInitialSearchResultsResponse> {
         const requestParams: ApiServiceInitialRequestParams = {
             dealType,
@@ -181,13 +182,17 @@ export class RealEstateController {
             page: page || 1,
         };
         const response: ApiServiceResponse = await this.realEstateApiService.fetchInitialRealEstateData(requestParams);
-        const document = await this.realEstateDbService.insertNewDocument({
-            items: response.feed_items,
-            search_params: response.search_params,
-            total_pages: response.total_pages,
-            last_updated: getTodayDateTime(),
-        });
-        const searchId: string = document._id.toString();
+
+        let searchId: string = '';
+        if (saveToDb.toString() === 'true') {
+            const document = await this.realEstateDbService.insertNewDocument({
+                items: response.feed_items,
+                search_params: response.search_params,
+                total_pages: response.total_pages,
+                last_updated: getTodayDateTime(),
+            });
+            searchId = document._id.toString();
+        }
 
         return {
             search_id: searchId,

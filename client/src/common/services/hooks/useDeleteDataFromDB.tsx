@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useMutation } from '@tanstack/react-query';
 
-import { deleteDataWithAxios, deleteDataWithBeacon } from '../services';
+import { deleteDataWithAxios, deleteDataWithBeacon } from '@common/services/functions';
 
 type UseDeleteDataFromDBResult = {
     deleteDataExplicitly: () => void;

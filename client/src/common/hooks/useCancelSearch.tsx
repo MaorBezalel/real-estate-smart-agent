@@ -1,8 +1,7 @@
 import { useEffect, Dispatch, SetStateAction } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { useDeleteDataFromDB, usePageHide } from '.';
-
-//import { SearchState } from '.';
+import { usePageHide } from '@common/hooks';
+import { useDeleteDataFromDB } from '@common/services/hooks';
 
 /**
  * A hook which is responsible for cancelling the search, either explicitly or implicitly.

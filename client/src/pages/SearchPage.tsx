@@ -1,10 +1,10 @@
 import {
     useSearchState,
-    useFetchRealEstateData,
     useCancelSearch,
     useManageSearchResultsDuringFetch,
     useOrderItems,
 } from '@common/hooks';
+import { useFetchRealEstateData } from '@common/services/hooks';
 
 import { SearchStateContext } from '@common/contexts';
 

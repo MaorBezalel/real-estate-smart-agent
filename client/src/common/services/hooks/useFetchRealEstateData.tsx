@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
+import { useDeviceType } from '@common/hooks';
 
-import { fetchInitialData, fetchUpdatedData } from '../services';
+import { fetchInitialData, fetchUpdatedData } from '@common/services/functions';
 
 import {
     InitialRealEstateGetResponseDto,
@@ -23,15 +24,17 @@ type UseFetchRealEstateDataResult = {
  */
 export default function useFetchRealEstateData(enabled: boolean): UseFetchRealEstateDataResult {
     const [searchId, setSearchId] = useState<string>('');
+    const { isDesktop } = useDeviceType();
     const location = useLocation();
 
     const query = useQuery({
         queryKey: ['getRealEstateData'],
         queryFn: async () => {
             let data: InitialRealEstateGetResponseDto | UpdatedRealEstateGetResponseDto;
+            console.log('isDesktop: ', isDesktop);
 
             if (!searchId) {
-                data = await fetchInitialData(location.search);
+                data = await fetchInitialData(location.search, isDesktop);
                 setSearchId(data.search_id);
             } else {
                 data = await fetchUpdatedData(searchId);
