@@ -30,6 +30,10 @@
     textarea {
         font-family: 'Noto Sans Hebrew';
     }
+
+    img {
+        @apply select-none;
+    }
 }
 
 @layer utilities {

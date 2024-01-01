@@ -22,6 +22,7 @@ export default function PageHeading(): React.JSX.Element {
                 alt="מצאו בקלות את הנכס המושלם עבורכם!"
                 role="heading"
                 aria-level={1}
+                draggable={false}
                 data-testid={TEST_ID.COMMON.PAGE_HEADING.HOME_PAGE}
             />
         </picture>
