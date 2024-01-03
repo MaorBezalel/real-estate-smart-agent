@@ -1,21 +1,25 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { Suspense } from 'react';
 
-import Header from '@layouts/header/Header';
-import Header1 from '@layouts/header';
+import Header from '@layouts/header';
 
-import HomePage from '@pages/HomePage';
-import AboutPage from '@pages/AboutPage';
-import SearchPage from '@pages/SearchPage';
+const HomePage = React.lazy(() => import('@pages/HomePage'));
+const AboutPage = React.lazy(() => import('@pages/AboutPage'));
+const SearchPage = React.lazy(() => import('@pages/SearchPage'));
+
+import '@common/assets/animations/loading.css';
 
 export default function App() {
     return (
         <Router>
-            <Header1 />
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="about" element={<AboutPage />} />
-                <Route path="search" element={<SearchPage />} />
-            </Routes>
+            <Header />
+            <Suspense fallback={<div className="fallback-loading pac-man" />}>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="about" element={<AboutPage />} />
+                    <Route path="search" element={<SearchPage />} />
+                </Routes>
+            </Suspense>
         </Router>
     );
 }
