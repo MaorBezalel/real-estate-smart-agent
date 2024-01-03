@@ -59,15 +59,5 @@ const MobileListItem = ({ index, children }: { index: number; children: React.Re
     );
 };
 const DesktopListItem = ({ index, children }: { index: number; children: React.ReactNode }) => {
-    return (
-        <li
-            key={index}
-            className="text-2xl font-medium text-text
-            hover:text-accent  
-            tablet-sm:text-3xl
-            tablet-lg:text-xl"
-        >
-            {children}
-        </li>
-    );
+    return <li key={index}>{children}</li>;
 };
