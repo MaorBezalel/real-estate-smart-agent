@@ -1,40 +1,35 @@
 import { useMediaQuery } from '@layouts/header/hooks';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-export default function IconMenu(): React.JSX.Element {
+export default function PageLinkMenu(): React.JSX.Element {
     const isMobile = useMediaQuery('(max-width: 1023px)');
     const ListItem = isMobile ? MobileListItem : DesktopListItem;
 
-    const socialRoutes = [
-        {
-            href: 'https://github.com/MaorBezalel/real-estate-smart-agent',
-            icon: faGithub,
-            color: 'black',
-        },
-        {
-            href: 'https://youtu.be/8YtzmtPDKsA',
-            icon: faYoutube,
-            color: 'red',
-        },
+    const routes = [
+        { name: 'דף הבית', path: '/' },
+        { name: 'חיפוש נדל"ן', path: '/search' },
+        { name: 'אודות', path: '/about' },
     ];
 
     return (
-        <ul className="flex items-center justify-center gap-20">
-            {socialRoutes.map((route, index) => (
+        <ul
+            className="flex flex-col items-center justify-center gap-6
+            tablet-lg:flex-row tablet-lg:gap-12"
+        >
+            {routes.map((route, index) => (
                 <ListItem key={index} index={index}>
-                    <a href={route.href} target="_blank" rel="noreferrer noopener">
-                        <FontAwesomeIcon
-                            icon={route.icon}
-                            className={`relative h-9 w-10 transition-transform duration-[294ms] ease-out text-[${route.color}]
-                            hover:text-opacity-60
-                            tablet-sm:scale-125
-                            tablet-lg:h-7 tablet-lg:w-7
-                            laptop-sm:h-8 laptop-sm:w-8`}
-                        />
-                    </a>
+                    <Link
+                        reloadDocument
+                        to={route.path}
+                        className="text-2xl font-medium text-text
+                        hover:text-accent  
+                        tablet-sm:text-3xl
+                        tablet-lg:text-xl"
+                    >
+                        {route.name}
+                    </Link>
                 </ListItem>
             ))}
         </ul>

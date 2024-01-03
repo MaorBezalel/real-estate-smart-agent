@@ -1,4 +1,4 @@
-import Main from '@layouts/main/Main';
+import Main from '@layouts/main';
 
 import Illustration from '@common/components/illustration/HomePageIllustration';
 import PageHeading from '@common/components/page-heading/HomePageHeading';

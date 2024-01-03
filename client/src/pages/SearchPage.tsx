@@ -1,25 +1,15 @@
-import {
-    useSearchState,
-    useCancelSearch,
-    useManageSearchResultsDuringFetch,
-    useOrderItems,
-} from '@common/hooks';
+import { useSearchState, useCancelSearch, useManageSearchResultsDuringFetch, useOrderItems } from '@common/hooks';
 import { useFetchRealEstateData } from '@common/services/hooks';
 
 import { SearchStateContext } from '@common/contexts';
 
-import Main from '@layouts/main/Main';
+import Main from '@layouts/main';
 import PageHeading from '@common/components/page-heading/SearchPageHeading';
 import Separator from '@common/components/separator/SearchPageSeparator';
 
 import { SearchFormContext } from '@features/search-form/contexts';
 import SearchForm from '@features/search-form';
-import {
-    DealTypeSelectField,
-    FormButton,
-    PriceInputField,
-    SettlementSearchField,
-} from '@features/search-form/components';
+import { DealTypeSelectField, FormButton, PriceInputField, SettlementSearchField } from '@features/search-form/components';
 
 import FailedResults from '@features/failed-results';
 import LoadingResults from '@features/loading-results';
