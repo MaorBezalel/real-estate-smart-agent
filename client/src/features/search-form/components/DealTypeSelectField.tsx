@@ -16,11 +16,7 @@ export default function DealTypeSelectField(): React.JSX.Element {
         register,
         formState: { isSubmitSuccessful, errors },
     } = useFormContext<FormDataInputs>();
-    const {
-        value: hasSelectedOption,
-        setTrue: colorTextAsSelected,
-        setFalse: colorTextAsPlaceholder,
-    } = useBoolean(false);
+    const { value: hasSelectedOption, setTrue: colorTextAsSelected, setFalse: colorTextAsPlaceholder } = useBoolean(false);
 
     const handleChangeOfOption = ({ target: selectElement }: React.ChangeEvent<HTMLSelectElement>) => {
         const wasAnyOptionSelected = selectElement.value !== '';
@@ -67,11 +63,7 @@ export default function DealTypeSelectField(): React.JSX.Element {
                     disabled: isSubmitSuccessful,
                 })}
             >
-                <option
-                    hidden
-                    value=""
-                    data-testid={TEST_ID.FEATURE.SEARCH_FORM.DEAL_TYPE_SELECT_FIELD.OPTION}
-                >
+                <option hidden value="" data-testid={TEST_ID.FEATURE.SEARCH_FORM.DEAL_TYPE_SELECT_FIELD.OPTION}>
                     נכס ל...
                 </option>
                 <option
@@ -107,6 +99,7 @@ export default function DealTypeSelectField(): React.JSX.Element {
                 className="absolute left-2 top-1/2 -translate-y-1/2 text-accent transition duration-200 ease-in-out
                 peer-focus:rotate-180 peer-focus:scale-110 peer-focus:brightness-110
                 peer-disabled:opacity-50
+                peer-aria-[invalid=true]:text-[red]
                 tablet-sm:text-lg 
                 laptop-sm:text-xl
                 laptop-md:text-2xl"

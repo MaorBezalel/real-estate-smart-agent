@@ -4,6 +4,8 @@ import { useSearchParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
+import { TEST_ID } from '@common/data/constants/testIds';
+
 type SortByDropdownMenuProps = {
     options: readonly string[];
 };
@@ -23,6 +25,7 @@ export default function SortByDropdownMenu({ options }: SortByDropdownMenuProps)
         <div
             className="flex items-center
             justify-between tablet-sm:items-baseline tablet-sm:gap-6"
+            data-testid={TEST_ID.FEATURE.RESULTS_CONTROLS.SORT_BY_DROPDOWN_MENU}
         >
             <label
                 className="text-2xl font-extrabold text-secondary underline underline-offset-4 antialiased

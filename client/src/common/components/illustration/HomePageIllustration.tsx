@@ -1,6 +1,8 @@
 import Lottie from 'lottie-react';
 import animationData from '@common/assets/animations/estate-searching.json';
 
+import { TEST_ID } from '@common/data/constants/testIds';
+
 export default function HomePageIllustration(): React.JSX.Element {
     return (
         <Lottie
@@ -9,7 +11,8 @@ export default function HomePageIllustration(): React.JSX.Element {
             animationData={animationData}
             loop={true}
             aria-roledescription="Lottie Illustration"
-            aria-label="איור של חיפוש נדלן."
+            aria-label='איור של חיפוש נדל"ן.'
+            data-testid={TEST_ID.COMMON.ILLUSTRATION.HOME_PAGE}
         />
     );
 }

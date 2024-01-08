@@ -1,10 +1,11 @@
 import { forwardRef } from 'react';
 import { useBoolean } from '@common/hooks';
 
-import { StatusIcon, InfoTooltip, PriceUpdateInfo, Address, AdditionalInfo } from './components';
+import { StatusIcon, InfoTooltip, PriceUpdateInfo, Address, AdditionalInfo } from '@features/real-estate-item/components';
 import Separator from '@common/components/separator/RealEstateItemSeparator';
 
 import { RealEstateDto } from '@common/data/dtos/real-estate.dto';
+import { TEST_ID } from '@common/data/constants/testIds';
 
 type RealEstateItemProps = RealEstateDto;
 
@@ -41,6 +42,7 @@ const RealEstateItem = forwardRef<HTMLLIElement, RealEstateItemProps>(
                     rel="noreferrer"
                     role="article"
                     data-status={isHovered ? 'default' : status}
+                    data-testid={TEST_ID.FEATURE.REAL_ESTATE_ITEM}
                     onMouseEnter={() => setIsHoveredToTrue()}
                 >
                     <StatusIcon status={status} />
@@ -48,12 +50,7 @@ const RealEstateItem = forwardRef<HTMLLIElement, RealEstateItemProps>(
                     <PriceUpdateInfo price={price} lastUpdated={new Date(lastUpdated)} />
                     <Address street={street} neighborhood={neighborhood} settlement={settlement} />
                     <Separator />
-                    <AdditionalInfo
-                        estateType={estateType}
-                        rooms={rooms}
-                        floor={floor as number | 'קרקע'}
-                        area={area}
-                    />
+                    <AdditionalInfo estateType={estateType} rooms={rooms} floor={floor as number | 'קרקע'} area={area} />
                 </a>
             </li>
         );

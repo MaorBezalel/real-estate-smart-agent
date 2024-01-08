@@ -80,19 +80,18 @@ export default function PriceInputField({ type }: PriceFieldProps): React.JSX.El
                             if (type === 'maxPrice') return true;
                             if (values['maxPrice'] === '') return true;
                             return (
-                                Number(value) <= Number(values['maxPrice']) ||
-                                'מחיר מינימלי חייב להיות נמוך ממחיר מקסימלי'
+                                Number(value) <= Number(values['maxPrice']) || 'מחיר מינימלי חייב להיות נמוך ממחיר מקסימלי'
                             );
                         },
                         maxPrice: (value: string, values: FormDataInputs) => {
                             if (type === 'minPrice') return true;
                             if (values['minPrice'] === '') return true;
                             return (
-                                Number(value) >= Number(values['minPrice']) ||
-                                'מחיר מקסימלי חייב להיות גבוה ממחיר מינימלי'
+                                Number(value) >= Number(values['minPrice']) || 'מחיר מקסימלי חייב להיות גבוה ממחיר מינימלי'
                             );
                         },
                     },
+                    deps: [type === 'minPrice' ? 'maxPrice' : 'minPrice'],
                 })}
             />
             <div

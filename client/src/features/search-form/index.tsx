@@ -1,5 +1,7 @@
 import { useFormContext } from 'react-hook-form';
-import { useSearchFormActions, useSubmitFormIfSearchParamsPresent } from './hooks';
+import { useSearchFormActions, useSubmitFormIfSearchParamsPresent } from '@features/search-form/hooks';
+
+import { TEST_ID } from '@common/data/constants/testIds';
 
 export type FormDataInputs = {
     dealType: string;
@@ -37,6 +39,7 @@ export default function SearchForm({ children }: SearchFormProps): React.JSX.Ele
             onSubmit={handleSubmit(onSubmit, onError)}
             aria-label="טופס חיפוש נכסים"
             data-has-invalid-fields={Object.keys(errors).length > 0}
+            data-testid={TEST_ID.FEATURE.SEARCH_FORM.FORM}
         >
             {children}
         </form>

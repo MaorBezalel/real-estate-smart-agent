@@ -1,10 +1,15 @@
+import { TEST_ID } from '@common/data/constants/testIds';
+
 type ItemCountProps = {
     count: number;
 };
 
 export default function ItemCount({ count }: ItemCountProps): React.JSX.Element {
     return (
-        <div className="flex items-baseline gap-2 self-center tablet-lg:self-auto">
+        <div
+            className="flex items-baseline gap-2 self-center tablet-lg:self-auto"
+            data-testid={TEST_ID.FEATURE.RESULTS_CONTROLS.ITEM_COUNT}
+        >
             <label
                 className="inline-block min-w-max text-2xl font-extrabold text-secondary underline underline-offset-4 antialiased
                 mobile-md:text-3xl
@@ -19,7 +24,7 @@ export default function ItemCount({ count }: ItemCountProps): React.JSX.Element 
             >
                 כמות התוצאות:{' '}
             </label>
-            <data
+            <p
                 className="text-2xl text-primary
                 mobile-md:text-3xl
                 mobile-lg:text-[2rem]
@@ -29,11 +34,10 @@ export default function ItemCount({ count }: ItemCountProps): React.JSX.Element 
                     textShadow:
                         '1px 1px 0 #001f24, -1px -1px 0 #001f24, 1px -1px 0 #001f24, -1px 1px 0 #001f24, 1px 1px 0 #001f24',
                 }}
-                value={count}
                 aria-labelby="item-count"
             >
                 {count}
-            </data>
+            </p>
         </div>
     );
 }

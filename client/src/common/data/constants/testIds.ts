@@ -26,6 +26,8 @@ export const TEST_ID = {
 
     FEATURE: {
         SEARCH_FORM: {
+            FORM: 'feature-search-form-form',
+
             FORM_BUTTON: {
                 ACTIVE: 'feature-search-form-form-button-active',
                 INACTIVE: 'feature-search-form-form-button-inactive',
@@ -65,5 +67,12 @@ export const TEST_ID = {
             PAGINATION_BUTTON: 'feature-pagination-pagination-button',
             PAGINATION_BODY: 'feature-pagination-pagination-body',
         },
-    }
+
+        RESULTS_CONTROLS: {
+            ITEM_COUNT: 'feature-results-control-item-count',
+            SORT_BY_DROPDOWN_MENU: 'feature-results-control-sort-by-dropdown-menu',
+        },
+
+        REAL_ESTATE_ITEM: 'feature-real-estate-item',
+    },
 } as const;
