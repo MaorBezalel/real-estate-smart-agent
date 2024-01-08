@@ -17,7 +17,6 @@ export const fetchInitialData = async (
     const searchQuery = searchParams + `&saveToDb=${saveToDb}`;
 
     const url = `${origin}${pathname}${searchQuery}`;
-    console.log(url);
     const response = await axios.get<InitialRealEstateGetResponseDto>(url);
 
     return response.data;
