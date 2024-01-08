@@ -69,9 +69,10 @@ A full-stack web application that allow users to search for various types of hou
         <tr>
         <td>🧪 Testing</td>
             <td>
-                <a href="https://testing-library.com/docs/react-testing-library/intro/"><img src="https://img.shields.io/badge/-TestingLibrary-%23E33332?style=for-the-badge&logo=testing-library&logoColor=white" alt="React Testing Library"></a>
-                <a href="https://vitest.dev/"><img src="https://img.shields.io/badge/Vitest-6E9F18.svg?style=for-the-badge&logo=Vitest&logoColor=white" alt="Vitest"></a>
                 <a href="https://www.jestjs.io/"><img src="https://img.shields.io/badge/Jest-C21325.svg?style=for-the-badge&logo=Jest&logoColor=white" alt="Jest"></a>
+                <a href="https://vitest.dev/"><img src="https://img.shields.io/badge/Vitest-6E9F18.svg?style=for-the-badge&logo=Vitest&logoColor=white" alt="Vitest"></a>
+                <a href="https://www.cypress.io/"><img src="https://img.shields.io/badge/Cypress-17202C.svg?style=for-the-badge&logo=Cypress&logoColor=white" alt="Cypress"></a>
+                <a href="https://testing-library.com/docs/react-testing-library/intro/"><img src="https://img.shields.io/badge/-TestingLibrary-%23E33332?style=for-the-badge&logo=testing-library&logoColor=white" alt="React Testing Library"></a>
             </td>
         </tr>
         <tr>
@@ -108,9 +109,8 @@ A full-stack web application that allow users to search for various types of hou
 - [Yad2](https://www.yad2.co.il/) - A well known Israeli website for publishing ads for various types of estates, cars, and more.
 - [React Flip Move](https://joshwcomeau.github.io/react-flip-move/) - A React component for animating lists when their order changes or when items are added or removed.
 - [React Lottie](https://www.npmjs.com/package/react-lottie) - A React component for rendering Lottie animations.
-- [React Query](https://react-query.tanstack.com/) - A React library for fetching, caching and updating asynchronous data.
-- [React Hook Form](https://react-hook-form.com/) - A React library for managing form state.
-- [React Router](https://reactrouter.com/) - A React library for routing.
+- [Hamburger React](https://github.com/cyntler/hamburger-react) - An animated hamburger menu icon for React.
+- [Framer Motion](https://www.framer.com/motion/) - A powerful motion library for React.
 - [Font Awesome](https://fontawesome.com/) - A library of icons.
 - [IconScout](https://iconscout.com/) - A platform for downloading SVG illustrations and Lottie animations.
 
