@@ -5,10 +5,7 @@ import { useDeviceType } from '@common/hooks';
 
 import { fetchInitialData, fetchUpdatedData } from '@common/services/functions';
 
-import {
-    InitialRealEstateGetResponseDto,
-    UpdatedRealEstateGetResponseDto,
-} from '@common/data/dtos/responses.dto';
+import { InitialRealEstateGetResponseDto, UpdatedRealEstateGetResponseDto } from '@common/data/dtos/responses.dto';
 
 type UseFetchRealEstateDataResult = {
     query: UseQueryResult<InitialRealEstateGetResponseDto | UpdatedRealEstateGetResponseDto, Error>;
@@ -31,7 +28,6 @@ export default function useFetchRealEstateData(enabled: boolean): UseFetchRealEs
         queryKey: ['getRealEstateData'],
         queryFn: async () => {
             let data: InitialRealEstateGetResponseDto | UpdatedRealEstateGetResponseDto;
-            console.log('isDesktop: ', isDesktop);
 
             if (!searchId) {
                 data = await fetchInitialData(location.search, isDesktop);

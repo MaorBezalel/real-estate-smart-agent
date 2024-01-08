@@ -75,7 +75,7 @@ export default function SearchPage(): React.JSX.Element {
             {query.isSuccess && (
                 <section className="flex h-full w-full flex-col gap-4">
                     <ResultsControls>
-                        <ItemCount count={query.data.items.length} />
+                        <ItemCount count={query.data?.items.length ?? 0} />
                         <SortByDropdownMenu options={orderOptions} />
                     </ResultsControls>
                     <RealEstateList
