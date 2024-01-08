@@ -72,7 +72,7 @@ export default function SearchPage(): React.JSX.Element {
             {!searchState.isInactive() && <Separator />}
             {isLoadingBeforeError && <LoadingResults />}
             {isLoadingAfterError && <FailedResults />}
-            {query.isSuccess && typeof query.data !== undefined && (
+            {query.isSuccess && !!query.data.items && (
                 <section className="flex h-full w-full flex-col gap-4">
                     <ResultsControls>
                         <ItemCount count={query.data.items.length} />
