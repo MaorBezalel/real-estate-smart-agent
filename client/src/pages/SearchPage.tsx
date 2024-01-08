@@ -72,10 +72,10 @@ export default function SearchPage(): React.JSX.Element {
             {!searchState.isInactive() && <Separator />}
             {isLoadingBeforeError && <LoadingResults />}
             {isLoadingAfterError && <FailedResults />}
-            {query.isSuccess && (
+            {query.isSuccess && typeof query.data !== undefined && (
                 <section className="flex h-full w-full flex-col gap-4">
                     <ResultsControls>
-                        <ItemCount count={30} />
+                        <ItemCount count={query.data.items.length} />
                         <SortByDropdownMenu options={orderOptions} />
                     </ResultsControls>
                     <RealEstateList
