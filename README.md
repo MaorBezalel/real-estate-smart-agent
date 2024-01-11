@@ -98,7 +98,7 @@ A full-stack web application that allow users to search for various types of hou
 ## 🎈 Features <a name="features"></a>
 
 - [x] Search for estates for rent or purchase
-- [x] Data live updates without the need to refresh/reload the page.
+- [x] Data live updates without the need to refresh/reload the page
 - [x] Ability to use URL query params to search for estates
 - [x] Filter results by price and date
 - [x] Highlight new and updated results
