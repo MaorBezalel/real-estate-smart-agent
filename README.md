@@ -3,7 +3,7 @@
 <div align="center">
     <h1>Real Estate Smart Agent App</h1>
     <h3>
-        <a href="#" color="white">
+        <a href="https://real-estate-smart-agent.netlify.app/" color="white">
         Live
         </a>
         <span> | </span>
@@ -98,7 +98,8 @@ A full-stack web application that allow users to search for various types of hou
 ## 🎈 Features <a name="features"></a>
 
 - [x] Search for estates for rent or purchase
-- [x] Use url query params to search for estates
+- [x] Data live updates without the need to refresh/reload the page.
+- [x] Ability to use URL query params to search for estates
 - [x] Filter results by price and date
 - [x] Highlight new and updated results
 - [x] Redirect to original post on Yad2
@@ -111,8 +112,6 @@ A full-stack web application that allow users to search for various types of hou
 - [React Lottie](https://www.npmjs.com/package/react-lottie) - A React component for rendering Lottie animations.
 - [Hamburger React](https://github.com/cyntler/hamburger-react) - An animated hamburger menu icon for React.
 - [Framer Motion](https://www.framer.com/motion/) - A powerful motion library for React.
-- [Font Awesome](https://fontawesome.com/) - A library of icons.
-- [IconScout](https://iconscout.com/) - A platform for downloading SVG illustrations and Lottie animations.
 
 ## 🙏 Acknowledgements <a name ="acknowledgements"></a>
 
