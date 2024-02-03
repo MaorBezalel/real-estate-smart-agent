@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 export default function Header(): React.JSX.Element {
     const [isOpen, setOpen] = useState(false);
     const ref = useRef(null);
-    useClickAway(ref, () => setOpen(false));
+    useClickAway(ref, () => setTimeout(() => setOpen(false), 50));
 
     return (
         <header className="relative z-10 w-full bg-secondary shadow-lg">
