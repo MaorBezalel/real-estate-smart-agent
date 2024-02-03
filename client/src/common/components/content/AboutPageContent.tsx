@@ -24,9 +24,9 @@ export default function AboutPageContent(): React.JSX.Element {
 
     return (
         <>
-            {content.map(({ heading, paragraph }) => {
+            {content.map(({ heading, paragraph }, index) => {
                 return (
-                    <section className="flex flex-col gap-2" data-testid={TEST_ID.COMMON.CONTENT.ABOUT_PAGE}>
+                    <section key={index} className="flex flex-col gap-2" data-testid={TEST_ID.COMMON.CONTENT.ABOUT_PAGE}>
                         <h2
                             className="text-center text-xl font-bold text-secondary underline underline-offset-4 antialiased mobile-md:text-2xl mobile-lg:text-3xl tablet-md:text-4xl tablet-lg:text-start tablet-lg:text-3xl laptop-sm:text-4xl laptop-md:text-[2.5rem] laptop-lg:text-[2.75rem]"
                             style={{
