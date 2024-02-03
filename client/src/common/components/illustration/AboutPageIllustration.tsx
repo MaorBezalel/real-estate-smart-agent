@@ -8,6 +8,7 @@ export default function AboutPageIllustration(): React.JSX.Element {
             style={{ gridArea: 'illustration' }}
             src={svgBanner}
             alt="איור של חיפוש נדלן"
+            draggable="false"
             data-testid={TEST_ID.COMMON.ILLUSTRATION.ABOUT_PAGE}
         />
     );
