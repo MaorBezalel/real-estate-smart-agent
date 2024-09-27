@@ -7,15 +7,23 @@ export class LoggingMiddleware implements NestMiddleware {
 
     use(req: Request, res: Response, next: NextFunction): void {
         const { ip, method, originalUrl } = req;
+
         const userAgent = req.get('user-agent') || '';
 
         res.on('finish', () => {
             const { statusCode } = res;
-            const contentLength = res.get('content-length');
+            const log = `
+            Method: ${method}
+            Status Code: ${statusCode}
+            URL: ${originalUrl}
+            IP Address: ${req.ips.length > 0 ? req.ips[0] : ip}
+            User Agent: ${userAgent}\n`
 
-            this.logger.log(
-                `${method} ${originalUrl} ${statusCode} ${contentLength} - ${userAgent} ${ip}`,
-            );
+            if (statusCode >= 400) {
+                this.logger.error(log);
+            } else {
+                this.logger.log(log);
+            }
         });
 
         next();

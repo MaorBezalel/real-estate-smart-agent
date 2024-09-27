@@ -1,9 +1,10 @@
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { rawBody: true });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, { rawBody: true });
 
   const config = new DocumentBuilder()
     .setTitle('Real Estate Smart Agent API')
@@ -16,6 +17,8 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.enableCors();
+
+  app.set('trust proxy', true);
 
   await app.listen(3000);
 }
