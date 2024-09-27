@@ -11,6 +11,7 @@ import {
     NotFoundException,
     ServiceUnavailableException,
     InternalServerErrorException,
+    UseGuards,
 } from '@nestjs/common';
 import * as rawbody from 'raw-body';
 import { Request } from 'express';
@@ -41,12 +42,14 @@ import {
     GetInitialSearchResultsResponse,
     GetUpdatedSearchResultsResponse,
 } from '../utils/dtos/responses.dto';
+import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
 
 /**
  * Controller for the real estate API.
  */
 @ApiTags('real-estate')
 @Controller('real-estate')
+@UseGuards(ThrottlerGuard)
 export class RealEstateController {
     /**
      * Constructor for RealEstateController.
@@ -184,15 +187,15 @@ export class RealEstateController {
         const response: ApiServiceResponse = await this.realEstateApiService.fetchInitialRealEstateData(requestParams);
 
         let searchId: string = '';
-        if (saveToDb.toString() === 'true') {
-            const document = await this.realEstateDbService.insertNewDocument({
-                items: response.feed_items,
-                search_params: response.search_params,
-                total_pages: response.total_pages,
-                last_updated: getTodayDateTime(),
-            });
-            searchId = document._id.toString();
-        }
+        // if (saveToDb.toString() === 'true') {
+        //     const document = await this.realEstateDbService.insertNewDocument({
+        //         items: response.feed_items,
+        //         search_params: response.search_params,
+        //         total_pages: response.total_pages,
+        //         last_updated: getTodayDateTime(),
+        //     });
+        //     searchId = document._id.toString();
+        // }
 
         return {
             search_id: searchId,
