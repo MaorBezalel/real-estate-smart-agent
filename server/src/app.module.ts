@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-
-import { seconds, ThrottlerModule } from '@nestjs/throttler';
 import { RealEstateModule } from './real-estate/real-estate.module';
+import { BlockIpMiddleware } from './middlewares/block-ip.middleware';
 import { Request } from 'express';
 
 @Module({
@@ -11,21 +11,21 @@ import { Request } from 'express';
     ThrottlerModule.forRoot([
       {
         name: 'short',
-        ttl: seconds(1),
+        ttl: 1,
         limit: 3,
-        getTracker: (req: Request) => req.ips.length ? req.ips[0] : req.ip,
+        getTracker: (req: Request) => (req.ips.length ? req.ips[0] : req.ip),
       },
       {
         name: 'medium',
-        ttl: seconds(10),
+        ttl: 10,
         limit: 5,
-        getTracker: (req: Request) => req.ips.length ? req.ips[0] : req.ip,
+        getTracker: (req: Request) => (req.ips.length ? req.ips[0] : req.ip),
       },
       {
         name: 'long',
-        ttl: seconds(30),
+        ttl: 30,
         limit: 10,
-        getTracker: (req: Request) => req.ips.length ? req.ips[0] : req.ip,
+        getTracker: (req: Request) => (req.ips.length ? req.ips[0] : req.ip),
       },
     ]),
     ConfigModule.forRoot({
@@ -33,7 +33,11 @@ import { Request } from 'express';
       isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.MONGO_URI),
-    RealEstateModule
+    RealEstateModule,
   ],
 })
-export class AppModule { }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(BlockIpMiddleware).forRoutes('*'); // Apply to all routes, or specify specific routes
+  }
+}
